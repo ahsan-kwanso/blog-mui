@@ -10,13 +10,11 @@ import Signup from "./pages/Signup";
 import Intro from "./pages/Intro";
 import Dashboard from "./pages/Dashboard";
 import ThemeProvider from "./contexts/ThemeContext";
-import Header from "./components/Header";
 
 const App = () => {
   //const location = useLocation();
 
   // Determine if the full header should be shown based on the current path
-  const showFullHeader = true;
 
   return (
     <ThemeProvider>
