@@ -75,11 +75,9 @@ const ThemeHeader = () => {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge color="error">
-            <ThemeToggleButton toggleTheme={toggleTheme} />
-          </Badge>
-        </IconButton>
+        <Badge color="error">
+          <ThemeToggleButton toggleTheme={toggleTheme} />
+        </Badge>
         <p>Change Theme</p>
       </MenuItem>
     </Menu>
