@@ -5,7 +5,7 @@ import Post from "./Post";
 
 const PostList = ({ posts, isLoading }) => {
   return (
-    <Container sx={{ marginTop: "60px" }}>
+    <Container sx={{ marginTop: "10px" }}>
       <Grid container spacing={2}>
         {isLoading
           ? Array.from(new Array(6)).map((_, index) => (

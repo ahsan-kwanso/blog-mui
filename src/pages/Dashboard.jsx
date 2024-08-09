@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Typography, Box, Pagination } from "@mui/material";
 import Header from "../components/Header";
 import PostList from "../components/PostList";
-
+import NavigationTabs from "../components/NavigationTabs";
 // Sample posts data
 const mockPosts = [
   {
@@ -127,6 +127,7 @@ const Dashboard = () => {
       <Header />
       <Container component="main" maxWidth="xl">
         <Box sx={{ padding: 4 }}>
+          <NavigationTabs />
           <PostList posts={paginatedPosts} isLoading={isLoading} />
           <Box sx={{ display: "flex", justifyContent: "center", marginTop: 2 }}>
             <Pagination
