@@ -10,6 +10,8 @@ import Signup from "./pages/Signup";
 import Intro from "./pages/Intro";
 import Dashboard from "./pages/Dashboard";
 import ThemeProvider from "./contexts/ThemeContext";
+import CreatePost from "./pages/CreatePost";
+import EditPost from "./pages/EditPost";
 
 const App = () => {
   //const location = useLocation();
@@ -24,6 +26,8 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/post/create-post" element={<CreatePost />} />
+          <Route path="/post/edit-post/:postId" element={<EditPost />} />
           {/* Other routes */}
         </Routes>
       </Router>

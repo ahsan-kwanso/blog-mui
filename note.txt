@@ -1,3 +1,20 @@
 using mui for designing frontend 
 
 Start with adding roboto google font to index.html
+
+add all the pages first then think of where to place buttons for them when to navigate etc.
+
+
+ok so which pages are done
+
+intro
+login
+signup
+dashboard
+create
+edit
+
+remaining
+my post
+profile
+post view
