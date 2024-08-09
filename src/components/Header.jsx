@@ -58,6 +58,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+// Custom Typography component for "Dribble"
+const CustomTypography = styled(Typography)(({ theme }) => ({
+  fontFamily: "'Roboto', sans-serif", // Font family
+  fontWeight: 300, // Less bold
+  fontStyle: "italic", // Italic style
+  letterSpacing: "0.1em", // Adjust spacing if needed
+  fontSize: "2rem", // Larger font size
+}));
+
 const Header = () => {
   //my addition
   const { toggleTheme } = useTheme();
@@ -172,14 +181,9 @@ const Header = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          >
-            Dribble
-          </Typography>
+          <CustomTypography variant="h6" noWrap component="div">
+            𝔇𝔯𝔦𝔟𝔟𝔩𝔢
+          </CustomTypography>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />

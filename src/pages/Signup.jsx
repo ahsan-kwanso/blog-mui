@@ -11,6 +11,7 @@ import {
   Link,
 } from "@mui/material";
 import { styled } from "@mui/system";
+import ThemeHeader from "../components/ThemeHeader";
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(4),
@@ -53,54 +54,57 @@ const Signup = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <StyledPaper>
-        <Typography variant="h5" component="h1" sx={{ fontWeight: "bold" }}>
-          Sign Up
-        </Typography>
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          <TextField
-            label="Name"
-            variant="outlined"
-            margin="normal"
-            fullWidth
-            {...register("name", { required: "Name is required" })}
-            error={!!errors.name}
-            helperText={errors.name?.message}
-          />
-          <TextField
-            label="Email"
-            variant="outlined"
-            margin="normal"
-            fullWidth
-            {...register("email", { required: "Email is required" })}
-            error={!!errors.email}
-            helperText={errors.email?.message}
-          />
-          <TextField
-            label="Password"
-            type="password"
-            variant="outlined"
-            margin="normal"
-            fullWidth
-            {...register("password", { required: "Password is required" })}
-            error={!!errors.password}
-            helperText={errors.password?.message}
-          />
-          <SubmitButton
-            type="submit"
-            variant="contained"
-            color="primary"
-            fullWidth
-          >
+    <>
+      <ThemeHeader />
+      <Container component="main" maxWidth="xs" sx={{ marginTop: "100px" }}>
+        <StyledPaper>
+          <Typography variant="h5" component="h1" sx={{ fontWeight: "bold" }}>
             Sign Up
-          </SubmitButton>
-          <LoginLink href="/login" variant="body2">
-            Already have an account? Sign In
-          </LoginLink>
-        </Form>
-      </StyledPaper>
-    </Container>
+          </Typography>
+          <Form onSubmit={handleSubmit(onSubmit)}>
+            <TextField
+              label="Name"
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              {...register("name", { required: "Name is required" })}
+              error={!!errors.name}
+              helperText={errors.name?.message}
+            />
+            <TextField
+              label="Email"
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              {...register("email", { required: "Email is required" })}
+              error={!!errors.email}
+              helperText={errors.email?.message}
+            />
+            <TextField
+              label="Password"
+              type="password"
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              {...register("password", { required: "Password is required" })}
+              error={!!errors.password}
+              helperText={errors.password?.message}
+            />
+            <SubmitButton
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+            >
+              Sign Up
+            </SubmitButton>
+            <LoginLink href="/login" variant="body2">
+              Already have an account? Sign In
+            </LoginLink>
+          </Form>
+        </StyledPaper>
+      </Container>
+    </>
   );
 };
 

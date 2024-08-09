@@ -11,6 +11,7 @@ import {
   Link,
 } from "@mui/material";
 import { styled } from "@mui/system";
+import ThemeHeader from "../components/ThemeHeader";
 
 // Define styled components
 const StyledPaper = styled(Paper)(({ theme }) => ({
@@ -54,45 +55,48 @@ const Login = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <StyledPaper>
-        <Typography variant="h5" component="h1" sx={{ fontWeight: "bold" }}>
-          Sign In
-        </Typography>
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          <TextField
-            label="Email"
-            variant="outlined"
-            margin="normal"
-            fullWidth
-            {...register("email", { required: "Email is required" })}
-            error={!!errors.email}
-            helperText={errors.email?.message}
-          />
-          <TextField
-            label="Password"
-            type="password"
-            variant="outlined"
-            margin="normal"
-            fullWidth
-            {...register("password", { required: "Password is required" })}
-            error={!!errors.password}
-            helperText={errors.password?.message}
-          />
-          <SubmitButton
-            type="submit"
-            variant="contained"
-            color="primary"
-            fullWidth
-          >
+    <>
+      <ThemeHeader />
+      <Container component="main" maxWidth="xs" sx={{ marginTop: "100px" }}>
+        <StyledPaper>
+          <Typography variant="h5" component="h1" sx={{ fontWeight: "bold" }}>
             Sign In
-          </SubmitButton>
-          <SignupLink href="/signup" variant="body2">
-            Don't have an account? Sign Up
-          </SignupLink>
-        </Form>
-      </StyledPaper>
-    </Container>
+          </Typography>
+          <Form onSubmit={handleSubmit(onSubmit)}>
+            <TextField
+              label="Email"
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              {...register("email", { required: "Email is required" })}
+              error={!!errors.email}
+              helperText={errors.email?.message}
+            />
+            <TextField
+              label="Password"
+              type="password"
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              {...register("password", { required: "Password is required" })}
+              error={!!errors.password}
+              helperText={errors.password?.message}
+            />
+            <SubmitButton
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+            >
+              Sign In
+            </SubmitButton>
+            <SignupLink href="/signup" variant="body2">
+              Don't have an account? Sign Up
+            </SignupLink>
+          </Form>
+        </StyledPaper>
+      </Container>
+    </>
   );
 };
 
