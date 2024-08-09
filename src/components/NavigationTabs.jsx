@@ -13,7 +13,7 @@ const NavigationTabs = () => {
     if (newValue === "all-posts") {
       navigate("/dashboard");
     } else {
-      navigate("/dashboard/my-posts");
+      navigate("/my-posts");
     }
   };
 
