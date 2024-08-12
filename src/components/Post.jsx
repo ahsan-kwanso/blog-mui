@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardContent,
   CardMedia,
   Typography,
   IconButton,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
@@ -13,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { styled } from "@mui/material/styles";
 import { getRandomImage } from "../utils/getRandomImage";
+import useDeletePost from "../hooks/useDeletePost";
 
 const PostCard = styled(Card)(({ theme }) => ({
   width: "100%",
@@ -27,10 +30,6 @@ const PostImage = styled(CardMedia)(({ theme }) => ({
   maxHeight: 140,
 }));
 
-const PostContent = styled(CardContent)(({ theme }) => ({
-  flexGrow: 1, // Ensure the content section takes available space
-}));
-
 const Post = ({
   postId,
   author,
@@ -42,7 +41,14 @@ const Post = ({
   showDelete,
 }) => {
   const navigate = useNavigate(); // Initialize the navigate function
+  const { deletePost, isDeleting, error: deleteError } = useDeletePost();
+  const [successMessage, setSuccessMessage] = useState("");
 
+  const onPostDeletion = () => {
+    setTimeout(() => {
+      window.location.reload(); // Reload the window after showing success message
+    }, 1250); // Adjust delay if needed
+  };
   // Event handler functions
   const handleView = () => {
     navigate(`/posts/${postId}`); // Navigate to the PostView route
@@ -53,8 +59,10 @@ const Post = ({
   };
 
   const handleDelete = () => {
-    console.log(`Delete post ${postId}`);
-    // Add your delete logic here
+    deletePost(postId, () => {
+      setSuccessMessage("Post deleted successfully");
+      onPostDeletion(); // Refresh the posts list after deletion
+    });
   };
 
   return (
@@ -90,6 +98,16 @@ const Post = ({
         <IconButton onClick={handleDelete} color="error">
           <DeleteIcon />
         </IconButton>
+      )}
+      {deleteError && (
+        <Snackbar open={Boolean(deleteError)} autoHideDuration={6000}>
+          <Alert severity="error">{deleteError}</Alert>
+        </Snackbar>
+      )}
+      {successMessage && (
+        <Snackbar open={Boolean(successMessage)} autoHideDuration={2000}>
+          <Alert severity="success">{successMessage}</Alert>
+        </Snackbar>
       )}
     </PostCard>
   );
