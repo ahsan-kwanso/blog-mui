@@ -10,27 +10,40 @@ import EditPost from "./pages/EditPost";
 import MyPosts from "./pages/MyPosts";
 import Profile from "./pages/Profile";
 import PostView from "./pages/PostView";
+import Footer from "./components/Footer";
+import { Box } from "@mui/material";
 
 const App = () => {
-  //const location = useLocation();
-
-  // Determine if the full header should be shown based on the current path
-
   return (
     <ThemeProvider>
       <Router>
-        <Routes>
-          <Route path="/" element={<Intro />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/my-posts" element={<MyPosts />} />
-          <Route path="/post/create-post" element={<CreatePost />} />
-          <Route path="/post/edit-post/:postId" element={<EditPost />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/posts/:postId" element={<PostView />} />
-          {/* Other routes */}
-        </Routes>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            minHeight: "100vh",
+          }}
+        >
+          <Box
+            sx={{
+              flex: 1,
+            }}
+          >
+            <Routes>
+              <Route path="/" element={<Intro />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/my-posts" element={<MyPosts />} />
+              <Route path="/post/create-post" element={<CreatePost />} />
+              <Route path="/post/edit-post/:postId" element={<EditPost />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/posts/:postId" element={<PostView />} />
+              {/* Other routes */}
+            </Routes>
+          </Box>
+          <Footer />
+        </Box>
       </Router>
     </ThemeProvider>
   );
