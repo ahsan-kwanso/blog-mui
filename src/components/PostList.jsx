@@ -3,7 +3,7 @@ import React from "react";
 import { Container, Grid, Skeleton } from "@mui/material";
 import Post from "./Post";
 
-const PostList = ({ posts, isLoading, onEdit, onDelete }) => {
+const PostList = ({ posts, isLoading, showEdit, showDelete }) => {
   return (
     <Container sx={{ marginTop: "10px" }}>
       <Grid container spacing={2}>
@@ -20,14 +20,14 @@ const PostList = ({ posts, isLoading, onEdit, onDelete }) => {
           : posts.map((post) => (
               <Grid item xs={12} sm={6} md={4} key={post.id}>
                 <Post
+                  postId={post.id}
                   author={post.author}
                   image={post.image}
                   title={post.title}
                   content={post.content}
                   date={post.date}
-                  onView={() => console.log(`View post ${post.id}`)}
-                  onEdit={onEdit}
-                  onDelete={onDelete}
+                  showEdit={showEdit}
+                  showDelete={showDelete}
                 />
               </Grid>
             ))}

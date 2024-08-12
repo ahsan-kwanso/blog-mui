@@ -1,6 +1,13 @@
 // src/pages/Dashboard.jsx
 import React, { useState, useEffect } from "react";
-import { Container, Typography, Box, Pagination } from "@mui/material";
+import {
+  Container,
+  Typography,
+  Box,
+  Pagination,
+  useEventCallback,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import PostList from "../components/PostList";
 import NavigationTabs from "../components/NavigationTabs";
@@ -76,6 +83,7 @@ const MyPosts = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 6;
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Simulate data fetching
@@ -88,23 +96,13 @@ const MyPosts = () => {
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
   };
-
-  const handleEdit = (postId) => {
-    console.log(`Edit post ${postId}`);
-    // Add your edit logic here
-  };
-
-  const handleDelete = (postId) => {
-    console.log(`Delete post ${postId}`);
-    // Add your delete logic here
-  };
-
+  //console.log(posts);
   // Slice the posts for pagination
   const paginatedPosts = posts.slice(
     (currentPage - 1) * postsPerPage,
     currentPage * postsPerPage
   );
-
+  //console.log(paginatedPosts);
   return (
     <>
       <Header />
@@ -114,8 +112,8 @@ const MyPosts = () => {
           <PostList
             posts={paginatedPosts}
             isLoading={isLoading}
-            onEdit={(postId) => handleEdit(postId)}
-            onDelete={(postId) => handleDelete(postId)}
+            showEdit={true}
+            showDelete={true}
           />
           <Box sx={{ display: "flex", justifyContent: "center", marginTop: 2 }}>
             <Pagination

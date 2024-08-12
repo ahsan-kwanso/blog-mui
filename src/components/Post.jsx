@@ -1,4 +1,3 @@
-// components/Post.jsx
 import React from "react";
 import {
   Card,
@@ -10,6 +9,7 @@ import {
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { styled } from "@mui/material/styles";
 import { getRandomImage } from "../utils/getRandomImage";
@@ -20,21 +20,37 @@ const PostCard = styled(Card)(({ theme }) => ({
 }));
 
 const Post = ({
+  postId,
   author,
   image,
   title,
   content,
   date,
-  onView,
-  onEdit,
-  onDelete,
+  showEdit,
+  showDelete,
 }) => {
+  const navigate = useNavigate(); // Initialize the navigate function
+
+  // Event handler functions
+  const handleView = () => {
+    navigate(`/posts/${postId}`); // Navigate to the PostView route
+  };
+
+  const handleEdit = () => {
+    navigate(`/post/edit-post/${postId}`); // Navigate to the EditPost route
+  };
+
+  const handleDelete = () => {
+    console.log(`Delete post ${postId}`);
+    // Add your delete logic here
+  };
+
   return (
     <PostCard>
       <CardMedia
         component="img"
         height="140"
-        image={getRandomImage()} // Default image if none is provided //pass img in case of actual image
+        image={getRandomImage() || image} // Use provided image or default image
         alt={title}
       />
       <CardContent>
@@ -51,16 +67,16 @@ const Post = ({
           {content.length > 110 ? `${content.substring(0, 110)}...` : content}
         </Typography>
       </CardContent>
-      <IconButton onClick={onView} color="primary" sx={{ margin: 2 }}>
+      <IconButton onClick={handleView} color="primary" sx={{ margin: 2 }}>
         <VisibilityIcon />
       </IconButton>
-      {onEdit && (
-        <IconButton onClick={onEdit} color="secondary">
+      {showEdit && (
+        <IconButton onClick={handleEdit} color="secondary">
           <EditIcon />
         </IconButton>
       )}
-      {onDelete && (
-        <IconButton onClick={onDelete} color="error">
+      {showDelete && (
+        <IconButton onClick={handleDelete} color="error">
           <DeleteIcon />
         </IconButton>
       )}
