@@ -1,6 +1,9 @@
 import React from "react";
-import { Tabs, Tab, Box } from "@mui/material";
+import { Tabs, Tab, Box, Button } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
+import AddIcon from "@mui/icons-material/Add"; // Import the Add icon
+import { green } from "@mui/material/colors";
+import Icon from "@mui/material/Icon";
 
 const NavigationTabs = () => {
   const navigate = useNavigate();
@@ -11,6 +14,8 @@ const NavigationTabs = () => {
   const handleTabChange = (event, newValue) => {
     if (newValue === "all-posts") {
       navigate("/dashboard");
+    } else if (newValue === "create-post") {
+      navigate("/post/create-post"); // Navigate to the Create Post page
     } else {
       navigate("/my-posts");
     }
@@ -36,6 +41,18 @@ const NavigationTabs = () => {
       >
         <Tab label="All Posts" value="all-posts" />
         <Tab label="My Posts" value="my-posts" />
+        {location.pathname === "/my-posts" && (
+          <Tab
+            label="Create Post"
+            value="create-post"
+            icon={<AddIcon />}
+            iconPosition="start"
+            sx={{
+              minWidth: 150, // Adjust the minimum width as needed
+              marginLeft: "auto", // Align to the right
+            }}
+          />
+        )}
       </Tabs>
     </Box>
   );

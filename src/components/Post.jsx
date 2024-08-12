@@ -59,12 +59,6 @@ const Post = ({
 
   return (
     <PostCard>
-      {/* <CardMedia
-        component="img"
-        height="140"
-        image={getRandomImage() || image} // Use provided image or default image
-        alt={title}
-      /> */}
       <PostImage component="img" image={getRandomImage()} alt={title} />
       <CardContent>
         <Typography variant="subtitle1" color="text.secondary">
