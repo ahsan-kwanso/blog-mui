@@ -9,6 +9,7 @@ import CreatePost from "./pages/CreatePost";
 import EditPost from "./pages/EditPost";
 import MyPosts from "./pages/MyPosts";
 import Profile from "./pages/Profile";
+import PostView from "./pages/PostView";
 
 const App = () => {
   //const location = useLocation();
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/post/create-post" element={<CreatePost />} />
           <Route path="/post/edit-post/:postId" element={<EditPost />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/posts/:postId" element={<PostView />} />
           {/* Other routes */}
         </Routes>
       </Router>
