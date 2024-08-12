@@ -63,7 +63,11 @@ const Post = ({
         <Typography variant="h6" component="div">
           {title}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{ textAlign: "justify" }}
+        >
           {content.length > 110 ? `${content.substring(0, 110)}...` : content}
         </Typography>
       </CardContent>
