@@ -1,6 +1,7 @@
 // src/pages/Profile.jsx
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
 import { Avatar, Container, Typography, Box, Button } from "@mui/material";
 import { stringAvatar } from "../utils/avatarUtils";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -8,12 +9,7 @@ import ThemeHeader from "../components/ThemeHeader";
 
 const Profile = () => {
   const navigate = useNavigate();
-  // Sample user data
-  const user = {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    createdAt: "2024-01-01",
-  };
+  const { user } = useContext(AuthContext);
 
   const handleBack = () => {
     navigate("/dashboard");
@@ -47,7 +43,7 @@ const Profile = () => {
           }}
         >
           <Avatar
-            {...stringAvatar("John Doe")}
+            {...stringAvatar(user.name)}
             sx={{ width: 60, height: 60, fontSize: 24 }}
           />
         </Box>
