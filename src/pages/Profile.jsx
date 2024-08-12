@@ -1,0 +1,78 @@
+// src/pages/Profile.jsx
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Avatar, Container, Typography, Box, Button } from "@mui/material";
+import { stringAvatar } from "../utils/avatarUtils";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ThemeHeader from "../components/ThemeHeader";
+
+const Profile = () => {
+  const navigate = useNavigate();
+  // Sample user data
+  const user = {
+    name: "John Doe",
+    email: "john.doe@example.com",
+    createdAt: "2024-01-01",
+  };
+
+  const handleBack = () => {
+    navigate("/dashboard");
+  };
+
+  return (
+    <Container component="main" maxWidth="xs">
+      <ThemeHeader />
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          padding: 3,
+          border: "1px solid #ddd",
+          borderRadius: "8px",
+          marginTop: "100px",
+        }}
+      >
+        <Box
+          sx={{
+            width: 80, // Adjusted size of the circle
+            height: 80, // Adjusted size of the circle
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: "50%",
+            backgroundColor: "none",
+            marginBottom: 2,
+            padding: 1, // Added padding around the Avatar
+          }}
+        >
+          <Avatar
+            {...stringAvatar("John Doe")}
+            sx={{ width: 60, height: 60, fontSize: 24 }}
+          />
+        </Box>
+        <Typography variant="h5" gutterBottom>
+          {user.name}
+        </Typography>
+        <Typography variant="body1" color="textSecondary" gutterBottom>
+          {user.email}
+        </Typography>
+        <Typography variant="body2" color="textSecondary">
+          Joined: {new Date(user.createdAt).toLocaleDateString()}
+        </Typography>
+        <Box sx={{ mt: 4 }}>
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<ArrowBackIcon />}
+            onClick={handleBack}
+          >
+            Back to Dashboard
+          </Button>
+        </Box>
+      </Box>
+    </Container>
+  );
+};
+
+export default Profile;

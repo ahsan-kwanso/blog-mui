@@ -12,25 +12,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { format } from "date-fns";
 import { styled } from "@mui/material/styles";
-import postImage from "../assets/space.jpeg"; // Example image from assets
-import postImage2 from "../assets/nature.jpeg";
-import postImage3 from "../assets/health.jpeg";
-import postImage4 from "../assets/football.jpeg";
-import postImage5 from "../assets/egypt.jpeg";
-import postImage6 from "../assets/history.jpeg";
-
-const getRandomImage = () => {
-  const images = [
-    postImage,
-    postImage2,
-    postImage3,
-    postImage4,
-    postImage5,
-    postImage6,
-  ];
-  const randomIndex = Math.floor(Math.random() * images.length);
-  return images[randomIndex];
-};
+import { getRandomImage } from "../utils/getRandomImage";
 
 const PostCard = styled(Card)(({ theme }) => ({
   maxWidth: 345,

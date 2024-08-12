@@ -8,6 +8,7 @@ import ThemeProvider from "./contexts/ThemeContext";
 import CreatePost from "./pages/CreatePost";
 import EditPost from "./pages/EditPost";
 import MyPosts from "./pages/MyPosts";
+import Profile from "./pages/Profile";
 
 const App = () => {
   //const location = useLocation();
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="/my-posts" element={<MyPosts />} />
           <Route path="/post/create-post" element={<CreatePost />} />
           <Route path="/post/edit-post/:postId" element={<EditPost />} />
+          <Route path="/profile" element={<Profile />} />
           {/* Other routes */}
         </Routes>
       </Router>
