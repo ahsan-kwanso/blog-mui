@@ -12,7 +12,7 @@ const AuthProvider = ({ children }) => {
       try {
         const response = await axiosInstance.get("/users/me");
         setUser(response.data.user);
-        console.log(response.data.user);
+        //console.log(response.data.user);
       } catch (error) {
         console.error("Failed to fetch user:", error);
         // Handle token expiration or invalid token

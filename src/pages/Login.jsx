@@ -1,7 +1,10 @@
 // src/pages/LoginPage.jsx
 
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { useError } from "../hooks/useError";
 import {
   TextField,
   Button,
@@ -9,6 +12,7 @@ import {
   Typography,
   Paper,
   Link,
+  Alert,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import ThemeHeader from "../components/ThemeHeader";
@@ -43,15 +47,28 @@ const SignupLink = styled(Link)(({ theme }) => ({
 }));
 
 const Login = () => {
+  const { signin } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [error, setError] = useError();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    // Handle form submission
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const { status } = await signin(data.email, data.password);
+      // Redirect or show success message
+      if (status === 200) {
+        //console.log(status, data);
+        navigate("/dashboard"); // Redirect to dashboard or another route
+      } else {
+        setError("An unexpected error occurred. Try Again Later");
+      }
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   return (
@@ -82,6 +99,11 @@ const Login = () => {
               error={!!errors.password}
               helperText={errors.password?.message}
             />
+            {error && (
+              <Alert severity="error" sx={{ mb: 2 }}>
+                {error}
+              </Alert>
+            )}
             <SubmitButton
               type="submit"
               variant="contained"
