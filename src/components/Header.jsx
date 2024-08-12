@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -17,6 +17,7 @@ import ThemeToggleButton from "./ThemeToggleButton";
 
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../contexts/ThemeContext";
+import { AuthContext } from "../contexts/AuthContext";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 const Search = styled("div")(({ theme }) => ({
@@ -71,6 +72,7 @@ const CustomTypography = styled(Typography)(({ theme }) => ({
 const Header = () => {
   //my addition
   const navigate = useNavigate();
+  const { signout } = useContext(AuthContext);
   const { toggleTheme } = useTheme();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -98,6 +100,11 @@ const Header = () => {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+  const handleSignOut = () => {
+    signout();
+    navigate("/"); // Redirect to signin page after signing out
   };
 
   const menuId = "primary-search-account-menu";
@@ -150,6 +157,7 @@ const Header = () => {
           size="large"
           aria-label="show 17 new notifications"
           color="inherit"
+          onClick={handleSignOut}
         >
           <Badge color="error">
             <LogoutIcon />
@@ -205,7 +213,7 @@ const Header = () => {
               edge="end"
               aria-label="sign out"
               aria-haspopup="true"
-              //   onClick={handleProfileMenuOpen}
+              onClick={handleSignOut}
               color="inherit"
             >
               <LogoutIcon />
