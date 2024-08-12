@@ -129,7 +129,14 @@ const Dashboard = () => {
         <Box sx={{ padding: 4 }}>
           <NavigationTabs />
           <PostList posts={paginatedPosts} isLoading={isLoading} />
-          <Box sx={{ display: "flex", justifyContent: "center", marginTop: 2 }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: 2,
+              mb: 5,
+            }}
+          >
             <Pagination
               count={Math.ceil(posts.length / postsPerPage)}
               page={currentPage}

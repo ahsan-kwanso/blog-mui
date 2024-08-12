@@ -20,7 +20,7 @@ const FooterText = styled(Typography)(({ theme }) => ({
 const Footer = () => {
   return (
     <FooterContainer
-      position="sticky"
+      position="fixed"
       sx={{
         top: "auto",
         bottom: 0,

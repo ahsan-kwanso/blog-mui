@@ -75,6 +75,8 @@ const Intro = () => {
           height: "100vh",
           padding: 4,
           gap: 2,
+          flexGrow: 1, // Ensure it grows to take up available space
+          mb: 8, // Add margin bottom to ensure space for footer
         }}
       >
         <Box
@@ -82,7 +84,7 @@ const Intro = () => {
             flex: 1,
             maxWidth: { xs: "100%", md: 600 },
             marginRight: { md: 4 },
-            textAlign: "left",
+            textAlign: "centre",
             mb: { xs: 4, md: 0 }, // Add margin bottom on small screens
           }}
         >

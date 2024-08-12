@@ -115,7 +115,14 @@ const MyPosts = () => {
             showEdit={true}
             showDelete={true}
           />
-          <Box sx={{ display: "flex", justifyContent: "center", marginTop: 2 }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: 2,
+              mb: 5,
+            }}
+          >
             <Pagination
               count={Math.ceil(posts.length / postsPerPage)}
               page={currentPage}
