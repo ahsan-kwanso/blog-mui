@@ -102,6 +102,7 @@ const Intro = () => {
               sx={{
                 animation: `${fadeIn} 1s ease-out`,
                 color: "text.secondary",
+                textAlign: "justify",
               }}
             >
               Explore engaging articles and join our vibrant community. Dive

@@ -22,3 +22,5 @@ post view
 Now add the navigations, so that your frontend app will work as you wanted it to work
 
 after this I will add the backend logic as well
+
+first start with signin signup one and add useContext
