@@ -15,7 +15,7 @@ const useFetchPosts = (page, limit) => {
         await new Promise((resolve) => setTimeout(resolve, 400));
 
         const response = await axiosInstance.get(
-          `/posts?page=${page}&limit=${limit}`
+          `/posts/me?page=${page}&limit=${limit}`
         );
         const { posts, total, nextPage } = response.data;
         setPosts(posts);

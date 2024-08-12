@@ -12,7 +12,6 @@ const Dashboard = () => {
   const limit = parseInt(searchParams.get("limit")) || 6;
 
   const { posts, total, isLoading } = useFetchPosts(page, limit);
-  console.log(posts);
   const handlePageChange = (event, value) => {
     setSearchParams({ page: value, limit });
   };
