@@ -15,6 +15,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import ThemeToggleButton from "./ThemeToggleButton";
 
+import { useNavigate } from "react-router-dom";
 import { useTheme } from "../contexts/ThemeContext";
 import LogoutIcon from "@mui/icons-material/Logout";
 
@@ -69,6 +70,7 @@ const CustomTypography = styled(Typography)(({ theme }) => ({
 
 const Header = () => {
   //my addition
+  const navigate = useNavigate();
   const { toggleTheme } = useTheme();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -79,6 +81,10 @@ const Header = () => {
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handleProfilePage = () => {
+    navigate("/profile");
   };
 
   const handleMobileMenuClose = () => {
@@ -111,7 +117,7 @@ const Header = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleProfilePage}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
