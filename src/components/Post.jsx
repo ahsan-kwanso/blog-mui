@@ -8,6 +8,8 @@ import {
   IconButton,
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { format } from "date-fns";
 import { styled } from "@mui/material/styles";
 import postImage from "../assets/space.jpeg"; // Example image from assets
@@ -35,7 +37,16 @@ const PostCard = styled(Card)(({ theme }) => ({
   margin: theme.spacing(2),
 }));
 
-const Post = ({ author, image, title, content, date, onView }) => {
+const Post = ({
+  author,
+  image,
+  title,
+  content,
+  date,
+  onView,
+  onEdit,
+  onDelete,
+}) => {
   return (
     <PostCard>
       <CardMedia
@@ -61,6 +72,16 @@ const Post = ({ author, image, title, content, date, onView }) => {
       <IconButton onClick={onView} color="primary" sx={{ margin: 2 }}>
         <VisibilityIcon />
       </IconButton>
+      {onEdit && (
+        <IconButton onClick={onEdit} color="secondary">
+          <EditIcon />
+        </IconButton>
+      )}
+      {onDelete && (
+        <IconButton onClick={onDelete} color="error">
+          <DeleteIcon />
+        </IconButton>
+      )}
     </PostCard>
   );
 };

@@ -3,7 +3,7 @@ import React from "react";
 import { Container, Grid, Skeleton } from "@mui/material";
 import Post from "./Post";
 
-const PostList = ({ posts, isLoading }) => {
+const PostList = ({ posts, isLoading, onEdit, onDelete }) => {
   return (
     <Container sx={{ marginTop: "10px" }}>
       <Grid container spacing={2}>
@@ -26,6 +26,8 @@ const PostList = ({ posts, isLoading }) => {
                   content={post.content}
                   date={post.date}
                   onView={() => console.log(`View post ${post.id}`)}
+                  onEdit={onEdit}
+                  onDelete={onDelete}
                 />
               </Grid>
             ))}
