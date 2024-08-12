@@ -27,6 +27,10 @@ const PostImage = styled(CardMedia)(({ theme }) => ({
   maxHeight: 140,
 }));
 
+const PostContent = styled(CardContent)(({ theme }) => ({
+  flexGrow: 1, // Ensure the content section takes available space
+}));
+
 const Post = ({
   postId,
   author,
@@ -70,7 +74,7 @@ const Post = ({
           {format(new Date(date), "MMMM dd, yyyy")}
         </Typography>
         <Typography variant="h6" component="div">
-          {title}
+          {title.length > 22 ? `${title.substring(0, 22)}...` : title}
         </Typography>
         <Typography
           variant="body2"
