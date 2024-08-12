@@ -107,7 +107,11 @@ const MyPosts = () => {
     <>
       <Header />
       <Container component="main" maxWidth="xl">
-        <Box sx={{ padding: 4 }}>
+        <Box
+          sx={{
+            padding: { xs: 0, sm: 4 }, // Zero padding on extra-small screens, padding 4 on small screens and above
+          }}
+        >
           <NavigationTabs />
           <PostList
             posts={paginatedPosts}

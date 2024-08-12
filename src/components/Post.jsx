@@ -15,8 +15,16 @@ import { styled } from "@mui/material/styles";
 import { getRandomImage } from "../utils/getRandomImage";
 
 const PostCard = styled(Card)(({ theme }) => ({
-  maxWidth: 345,
+  width: "100%",
   margin: theme.spacing(2),
+}));
+
+const PostImage = styled(CardMedia)(({ theme }) => ({
+  borderRadius: theme.shape.borderRadius,
+  objectFit: "cover",
+  width: "100%",
+  height: "auto",
+  maxHeight: 140,
 }));
 
 const Post = ({
@@ -47,12 +55,13 @@ const Post = ({
 
   return (
     <PostCard>
-      <CardMedia
+      {/* <CardMedia
         component="img"
         height="140"
         image={getRandomImage() || image} // Use provided image or default image
         alt={title}
-      />
+      /> */}
+      <PostImage component="img" image={getRandomImage()} alt={title} />
       <CardContent>
         <Typography variant="subtitle1" color="text.secondary">
           {author}
