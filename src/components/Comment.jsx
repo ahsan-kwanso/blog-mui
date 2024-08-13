@@ -7,14 +7,18 @@ import {
   Divider,
   Menu,
   MenuItem,
+  Alert,
 } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ReplyForm from "./ReplyForm";
 import { format } from "date-fns";
+import { useDeleteComment } from "../hooks/useDeleteComment";
 
 const Comment = ({ comment, onReplySubmit }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [replying, setReplying] = useState(false);
+  const { deleteComment, error, success } = useDeleteComment();
+
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -33,8 +37,26 @@ const Comment = ({ comment, onReplySubmit }) => {
     onReplySubmit();
   };
 
+  const handleDelete = async () => {
+    const success = await deleteComment(comment.id);
+    if (success) {
+      onReplySubmit(); // Refresh content after deletion
+    }
+    handleMenuClose(); // Close menu after delete
+  };
+
   return (
     <Box sx={{ padding: 2 }}>
+      {error && (
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {error}
+        </Alert>
+      )}
+      {success && (
+        <Alert severity="success" sx={{ mb: 2 }}>
+          {success}
+        </Alert>
+      )}
       <Box
         sx={{
           display: "flex",
@@ -54,8 +76,7 @@ const Comment = ({ comment, onReplySubmit }) => {
           open={Boolean(anchorEl)}
           onClose={handleMenuClose}
         >
-          <MenuItem onClick={handleMenuClose}>Edit</MenuItem>
-          <MenuItem onClick={handleMenuClose}>Delete</MenuItem>
+          <MenuItem onClick={handleDelete}>Delete</MenuItem>
           <MenuItem onClick={handleReply}>Reply</MenuItem>
         </Menu>
       </Box>
