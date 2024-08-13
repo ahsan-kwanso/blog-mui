@@ -32,12 +32,18 @@ const Dashboard = () => {
   // Determine which data to use based on searchQuery
   const posts = searchQuery ? postsSearch : postsDefault;
   const total = searchQuery ? totalSearch : totalDefault;
-  const nextPage = searchQuery ? nextPageSearch : nextPageDefault;
   const isLoading = searchQuery ? isLoadingSearch : isLoadingDefault;
-  const error = searchQuery ? errorSearch : errorDefault;
 
   const handlePageChange = (event, value) => {
-    setSearchParams({ page: value, limit });
+    const newParams = { page: value, limit };
+
+    // Only add searchQuery if it exists
+    if (searchQuery) {
+      newParams.search = searchQuery;
+    }
+
+    // Update the search params
+    setSearchParams(newParams);
   };
 
   return (

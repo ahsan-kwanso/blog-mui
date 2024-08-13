@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useCallback } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -15,10 +15,11 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import ThemeToggleButton from "./ThemeToggleButton";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useTheme } from "../contexts/ThemeContext";
 import { AuthContext } from "../contexts/AuthContext";
 import LogoutIcon from "@mui/icons-material/Logout";
+import debounce from "lodash/debounce";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -82,6 +83,10 @@ const Header = () => {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+  const location = useLocation();
+  const pathname = location.pathname;
+  //console.log(pathname);
+
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -109,12 +114,18 @@ const Header = () => {
   };
 
   const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value);
+    const value = event.target.value;
+    setSearchQuery(value);
+    debouncedSearch(value);
   };
 
-  const handleSearchSubmit = () => {
-    navigate(`/dashboard?search=${searchQuery}&page=1&limit=6`);
-  };
+  // Debounced search to avoid excessive API calls
+  const debouncedSearch = useCallback(
+    debounce((query) => {
+      navigate(`${pathname}?search=${query}&page=1&limit=6`);
+    }, 1500), // Adjust debounce delay as needed
+    []
+  );
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -214,9 +225,6 @@ const Header = () => {
               inputProps={{ "aria-label": "search" }}
               value={searchQuery}
               onChange={handleSearchChange}
-              onKeyPress={(event) => {
-                if (event.key === "Enter") handleSearchSubmit();
-              }}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
