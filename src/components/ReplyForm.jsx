@@ -1,10 +1,12 @@
 // src/components/ReplyForm.jsx
 import React, { useState } from "react";
-import { Box, TextField, Button } from "@mui/material";
+import { Box, TextField, Button, Alert } from "@mui/material";
 import axiosInstance from "../axiosInstance";
+import { useError } from "../hooks/useError";
 
 const ReplyForm = ({ postId, parentId, onClose }) => {
   const [reply, setReply] = useState("");
+  const [error, setError] = useError();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -18,12 +20,18 @@ const ReplyForm = ({ postId, parentId, onClose }) => {
       setReply("");
       onClose(); // Close the form after submission
     } catch (error) {
+      setError("Failed to submit reply. Please try again.");
       console.error("Failed to submit reply", error);
     }
   };
 
   return (
     <Box component="form" onSubmit={handleSubmit} sx={{ mt: 2 }}>
+      {error && (
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {error}
+        </Alert>
+      )}
       <TextField
         fullWidth
         label="Write a reply..."
