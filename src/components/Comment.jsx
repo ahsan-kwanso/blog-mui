@@ -93,7 +93,11 @@ const Comment = ({ comment, onReplySubmit }) => {
       {comment.subComments && comment.subComments.length > 0 && (
         <Box sx={{ ml: 4 }}>
           {comment.subComments.map((subComment) => (
-            <Comment key={subComment.id} comment={subComment} />
+            <Comment
+              key={subComment.id}
+              comment={subComment}
+              onReplySubmit={onReplySubmit}
+            />
           ))}
         </Box>
       )}
