@@ -42,7 +42,10 @@ const Comment = ({ comment }) => {
           alignItems: "center",
         }}
       >
-        <Typography variant="subtitle1">{comment.title}</Typography>
+        {/* <Typography variant="subtitle1">{comment.title}</Typography> */}
+        <Typography variant="subtitle1" color="text.primary">
+          {comment.content}
+        </Typography>
         <IconButton onClick={handleMenuClick}>
           <MoreVertIcon />
         </IconButton>
@@ -56,9 +59,6 @@ const Comment = ({ comment }) => {
           <MenuItem onClick={handleReply}>Reply</MenuItem>
         </Menu>
       </Box>
-      <Typography variant="body2" color="text.secondary">
-        {comment.content}
-      </Typography>
       <Typography variant="caption" color="text.secondary" sx={{ mt: 1 }}>
         {`Posted on ${format(new Date(comment.createdAt), "MMMM dd, yyyy")}`}
       </Typography>
