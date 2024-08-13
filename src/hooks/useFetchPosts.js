@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import axiosInstance from "../axiosInstance";
+import { useError } from "./useError";
 
 const useFetchPosts = (page, limit) => {
   const [posts, setPosts] = useState([]);
   const [total, setTotal] = useState(0);
   const [nextPage, setNextPage] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useError();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -22,7 +23,8 @@ const useFetchPosts = (page, limit) => {
         setTotal(total);
         setNextPage(nextPage);
       } catch (err) {
-        setError(err);
+        //console.log(err);
+        setError("Failed to Load Posts");
       } finally {
         setIsLoading(false);
       }

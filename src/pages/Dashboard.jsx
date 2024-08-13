@@ -1,6 +1,6 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
-import { Container, Box, Pagination } from "@mui/material";
+import { Container, Box, Pagination, Snackbar, Alert } from "@mui/material";
 import Header from "../components/Header";
 import PostList from "../components/PostList";
 import NavigationTabs from "../components/NavigationTabs";
@@ -33,6 +33,7 @@ const Dashboard = () => {
   const posts = searchQuery ? postsSearch : postsDefault;
   const total = searchQuery ? totalSearch : totalDefault;
   const isLoading = searchQuery ? isLoadingSearch : isLoadingDefault;
+  const error = searchQuery ? errorSearch : errorDefault;
 
   const handlePageChange = (event, value) => {
     const newParams = { page: value, limit };
@@ -56,6 +57,11 @@ const Dashboard = () => {
           }}
         >
           <NavigationTabs />
+          {error && (
+            <Snackbar open autoHideDuration={6000}>
+              <Alert severity="error">{error}</Alert>
+            </Snackbar>
+          )}
           <PostList posts={posts} isLoading={isLoading} />
           <Box
             sx={{
