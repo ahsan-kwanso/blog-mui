@@ -1,15 +1,25 @@
 // src/components/ReplyForm.jsx
 import React, { useState } from "react";
 import { Box, TextField, Button } from "@mui/material";
+import axiosInstance from "../axiosInstance";
 
-const ReplyForm = ({ onClose }) => {
+const ReplyForm = ({ postId, parentId, onClose }) => {
   const [reply, setReply] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Handle reply submission
-    console.log("Reply submitted:", reply);
-    setReply("");
+
+    try {
+      await axiosInstance.post("/comments", {
+        PostId: postId,
+        content: reply,
+        ParentId: parentId || null,
+      });
+      setReply("");
+      onClose(); // Close the form after submission
+    } catch (error) {
+      console.error("Failed to submit reply", error);
+    }
   };
 
   return (

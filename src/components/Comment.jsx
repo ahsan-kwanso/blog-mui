@@ -15,7 +15,6 @@ import { format } from "date-fns";
 const Comment = ({ comment }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [replying, setReplying] = useState(false);
-
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -62,7 +61,13 @@ const Comment = ({ comment }) => {
       <Typography variant="caption" color="text.secondary" sx={{ mt: 1 }}>
         {`Posted on ${format(new Date(comment.createdAt), "MMMM dd, yyyy")}`}
       </Typography>
-      {replying && <ReplyForm onClose={handleCloseReplyForm} />}
+      {replying && (
+        <ReplyForm
+          onClose={handleCloseReplyForm}
+          postId={comment.PostId}
+          parentId={comment.id}
+        />
+      )}
       {comment.subComments && comment.subComments.length > 0 && (
         <Box sx={{ ml: 4 }}>
           {comment.subComments.map((subComment) => (

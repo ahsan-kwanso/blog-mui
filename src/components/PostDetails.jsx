@@ -81,7 +81,13 @@ const PostDetails = ({ post }) => {
           Back to Dashboard
         </Button>
       </Box>
-      {isReplyFormVisible && <ReplyForm onClose={handleCloseReplyForm} />}
+      {isReplyFormVisible && (
+        <ReplyForm
+          onClose={handleCloseReplyForm}
+          postId={post.id}
+          parentId={null}
+        />
+      )}
     </PostCard>
   );
 };
