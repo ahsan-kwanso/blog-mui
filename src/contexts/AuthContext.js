@@ -39,7 +39,8 @@ const AuthProvider = ({ children }) => {
     } catch (error) {
       let errorMessage = "Something went wrong!";
       if (error.response) {
-        errorMessage = "Invalid Input format";
+        errorMessage = error.response.data.message;
+        if (!error.response.data.message) errorMessage = "Invalid format";
       }
       throw new Error(errorMessage);
     }
@@ -57,7 +58,8 @@ const AuthProvider = ({ children }) => {
     } catch (error) {
       let errorMessage = "Something went wrong!";
       if (error.response) {
-        errorMessage = "Invalid Input format";
+        errorMessage = error.response.data.message;
+        if (!error.response.data.message) errorMessage = "Invalid format";
       }
       throw new Error(errorMessage);
     }
