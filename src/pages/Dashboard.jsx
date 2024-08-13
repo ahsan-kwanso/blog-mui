@@ -5,13 +5,37 @@ import Header from "../components/Header";
 import PostList from "../components/PostList";
 import NavigationTabs from "../components/NavigationTabs";
 import useFetchPosts from "../hooks/useFetchPosts";
+import useFetchSearchPosts from "../hooks/useFetchSearchPosts";
 
 const Dashboard = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = parseInt(searchParams.get("page")) || 1;
   const limit = parseInt(searchParams.get("limit")) || 6;
+  const searchQuery = searchParams.get("search") || "";
 
-  const { posts, total, isLoading } = useFetchPosts(page, limit);
+  // Always call both hooks
+  const {
+    posts: postsSearch,
+    total: totalSearch,
+    nextPage: nextPageSearch,
+    isLoading: isLoadingSearch,
+    error: errorSearch,
+  } = useFetchSearchPosts(searchQuery, page, limit);
+  const {
+    posts: postsDefault,
+    total: totalDefault,
+    nextPage: nextPageDefault,
+    isLoading: isLoadingDefault,
+    error: errorDefault,
+  } = useFetchPosts(page, limit);
+
+  // Determine which data to use based on searchQuery
+  const posts = searchQuery ? postsSearch : postsDefault;
+  const total = searchQuery ? totalSearch : totalDefault;
+  const nextPage = searchQuery ? nextPageSearch : nextPageDefault;
+  const isLoading = searchQuery ? isLoadingSearch : isLoadingDefault;
+  const error = searchQuery ? errorSearch : errorDefault;
+
   const handlePageChange = (event, value) => {
     setSearchParams({ page: value, limit });
   };

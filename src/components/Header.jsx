@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -74,6 +74,7 @@ const Header = () => {
   const navigate = useNavigate();
   const { signout } = useContext(AuthContext);
   const { toggleTheme } = useTheme();
+  const [searchQuery, setSearchQuery] = useState("");
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -105,6 +106,14 @@ const Header = () => {
   const handleSignOut = () => {
     signout();
     navigate("/"); // Redirect to signin page after signing out
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const handleSearchSubmit = () => {
+    navigate(`/dashboard?search=${searchQuery}&page=1&limit=6`);
   };
 
   const menuId = "primary-search-account-menu";
@@ -203,6 +212,11 @@ const Header = () => {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
+              value={searchQuery}
+              onChange={handleSearchChange}
+              onKeyPress={(event) => {
+                if (event.key === "Enter") handleSearchSubmit();
+              }}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
