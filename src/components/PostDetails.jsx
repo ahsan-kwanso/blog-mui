@@ -22,7 +22,7 @@ const PostImage = styled(CardMedia)(({ theme }) => ({
   maxHeight: 300,
 }));
 
-const PostDetails = ({ post }) => {
+const PostDetails = ({ post, onReplySubmit }) => {
   const [isReplyFormVisible, setIsReplyFormVisible] = useState(false);
   const navigate = useNavigate();
 
@@ -36,6 +36,7 @@ const PostDetails = ({ post }) => {
 
   const handleCloseReplyForm = () => {
     setIsReplyFormVisible(false);
+    onReplySubmit(); //trigger refresh
   };
 
   return (

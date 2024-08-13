@@ -12,7 +12,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ReplyForm from "./ReplyForm";
 import { format } from "date-fns";
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, onReplySubmit }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [replying, setReplying] = useState(false);
   const handleMenuClick = (event) => {
@@ -30,6 +30,7 @@ const Comment = ({ comment }) => {
 
   const handleCloseReplyForm = () => {
     setReplying(false);
+    onReplySubmit();
   };
 
   return (

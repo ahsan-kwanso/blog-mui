@@ -1,9 +1,9 @@
-// src/hooks/useFetchPost.js
+// src/hooks/useFetchPostWithComments.js
 import { useState, useEffect } from "react";
-import axiosInstance from "../axiosInstance"; // Adjust the import path based on your project structure
+import axiosInstance from "../axiosInstance";
 import { useError } from "./useError";
 
-const useFetchPostWithComments = (postId) => {
+const useFetchPostWithComments = (postId, refresh) => {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useError();
@@ -18,7 +18,7 @@ const useFetchPostWithComments = (postId) => {
         return response.data;
       } catch (err) {
         setError("Failed to load post");
-        console.error(err); // Optional: log the error to the console
+        console.error(err);
         throw err;
       } finally {
         setLoading(false);
@@ -26,7 +26,7 @@ const useFetchPostWithComments = (postId) => {
     };
 
     fetchPost();
-  }, [postId]);
+  }, [postId, refresh]);
 
   return { post, loading, error };
 };

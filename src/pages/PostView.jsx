@@ -14,7 +14,13 @@ const StyledSkeleton = styled(Skeleton)(({ theme }) => ({
 
 const PostView = () => {
   const { postId } = useParams();
-  const { post, loading, error } = useFetchPostWithComments(postId); // Use the custom hook
+  const [refresh, setRefresh] = useState(0);
+  const { post, loading, error } = useFetchPostWithComments(postId, refresh);
+
+  const handleCommentSubmit = () => {
+    setRefresh((prev) => prev + 1); // Increment refresh count to trigger refetch
+  };
+
   return (
     <Container component="main" maxWidth="md">
       <ThemeHeader />
@@ -36,9 +42,16 @@ const PostView = () => {
           </>
         ) : (
           <>
-            {post && <PostDetails post={post} />}
+            {post && (
+              <PostDetails post={post} onReplySubmit={handleCommentSubmit} />
+            )}
             <Divider sx={{ my: 4 }} />
-            {post && <CommentSection comments={post.comments} />}
+            {post && (
+              <CommentSection
+                comments={post.comments}
+                onReplySubmit={handleCommentSubmit}
+              />
+            )}
           </>
         )}
       </Box>
