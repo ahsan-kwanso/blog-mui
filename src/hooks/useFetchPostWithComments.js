@@ -18,8 +18,8 @@ const useFetchPostWithComments = (postId, refresh) => {
         return response.data;
       } catch (err) {
         setError("Failed to load post");
-        console.error(err);
-        throw err;
+        //console.log(error);
+        //console.error(err);
       } finally {
         setLoading(false);
       }

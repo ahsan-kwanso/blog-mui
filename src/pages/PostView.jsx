@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Container, Box, Divider, Skeleton, Alert } from "@mui/material";
+import {
+  Container,
+  Box,
+  Divider,
+  Skeleton,
+  Alert,
+  Snackbar,
+} from "@mui/material";
 import { useParams } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import ThemeHeader from "../components/ThemeHeader";
@@ -26,9 +33,9 @@ const PostView = () => {
       <ThemeHeader />
       <Box sx={{ padding: 4, marginTop: "64px" }}>
         {error && (
-          <Alert severity="error" sx={{ mb: 2 }}>
-            {error}
-          </Alert>
+          <Snackbar open autoHideDuration={6000}>
+            <Alert severity="error">{error}</Alert>
+          </Snackbar>
         )}
         {loading ? (
           <>
