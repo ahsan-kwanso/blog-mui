@@ -15,7 +15,6 @@ const StyledSkeleton = styled(Skeleton)(({ theme }) => ({
 const PostView = () => {
   const { postId } = useParams();
   const { post, loading, error } = useFetchPostWithComments(postId); // Use the custom hook
-  console.log(error, loading);
   return (
     <Container component="main" maxWidth="md">
       <ThemeHeader />
