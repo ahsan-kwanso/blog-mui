@@ -6,15 +6,39 @@ import Header from "../components/Header";
 import PostList from "../components/PostList";
 import NavigationTabs from "../components/NavigationTabs";
 import useFetchMyPosts from "../hooks/useFetchMyPosts";
+import useFetchSearchMyPosts from "../hooks/useFetchSearchMyPosts";
 
 const MyPosts = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = parseInt(searchParams.get("page")) || 1;
   const limit = parseInt(searchParams.get("limit")) || 6;
+  const searchQuery = searchParams.get("search") || "";
 
-  const { posts, total, isLoading } = useFetchMyPosts(page, limit);
+  const {
+    posts: postsSearch,
+    total: totalSearch,
+    isLoading: isLoadingSearch,
+  } = useFetchSearchMyPosts(searchQuery, page, limit);
+  const {
+    posts: postsDefault,
+    total: totalDefault,
+    isLoading: isLoadingDefault,
+  } = useFetchMyPosts(page, limit);
+
+  const posts = searchQuery ? postsSearch : postsDefault;
+  const total = searchQuery ? totalSearch : totalDefault;
+  const isLoading = searchQuery ? isLoadingSearch : isLoadingDefault;
+
   const handlePageChange = (event, value) => {
-    setSearchParams({ page: value, limit });
+    const newParams = { page: value, limit };
+
+    // Only add searchQuery if it exists
+    if (searchQuery) {
+      newParams.search = searchQuery;
+    }
+
+    // Update the search params
+    setSearchParams(newParams);
   };
 
   return (
