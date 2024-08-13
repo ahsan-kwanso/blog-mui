@@ -1,9 +1,18 @@
 // src/pages/CreatePost.jsx
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Container, TextField, Button, Typography, Box } from "@mui/material";
+import {
+  Container,
+  TextField,
+  Button,
+  Typography,
+  Box,
+  Snackbar,
+  Alert,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ThemeHeader from "../components/ThemeHeader";
+import useCreatePost from "../hooks/useCreatePost";
 
 const CreatePost = () => {
   const {
@@ -11,14 +20,19 @@ const CreatePost = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const navigate = useNavigate();
+  const { createPost, isCreating, error, success } = useCreatePost();
 
-  const onSubmit = (data) => {
-    // Implement post creation logic here
-    console.log(data);
-
-    // Redirect to dashboard after creating post
-    navigate("/dashboard");
+  const onSubmit = async (data) => {
+    try {
+      await createPost(data);
+      if (!error) {
+        navigate("/my-posts");
+      }
+    } catch (e) {
+      console.error("Unexpected error:", e);
+    }
   };
 
   const handleCancel = () => {
@@ -85,6 +99,7 @@ const CreatePost = () => {
               variant="contained"
               color="primary"
               sx={{ width: "auto" }}
+              disabled={isCreating}
             >
               Create
             </Button>
@@ -99,6 +114,16 @@ const CreatePost = () => {
           </Box>
         </form>
       </Box>
+      {error && (
+        <Snackbar open autoHideDuration={6000}>
+          <Alert severity="error">{error}</Alert>
+        </Snackbar>
+      )}
+      {success && (
+        <Snackbar open autoHideDuration={6000}>
+          <Alert severity="success">{success}</Alert>
+        </Snackbar>
+      )}
     </Container>
   );
 };
