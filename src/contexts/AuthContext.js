@@ -16,7 +16,7 @@ const AuthProvider = ({ children }) => {
       } catch (error) {
         console.error("Failed to fetch user:", error);
         // Handle token expiration or invalid token
-        localStorage.removeItem("token");
+        // localStorage.removeItem("token");
         setUser(null);
       }
     }
@@ -37,8 +37,10 @@ const AuthProvider = ({ children }) => {
       await fetchUser();
       return response;
     } catch (error) {
-      const errorMessage =
-        error.response?.data?.message || "Invalid Input format.";
+      let errorMessage = "Something went wrong!";
+      if (error.response) {
+        errorMessage = "Invalid Input format";
+      }
       throw new Error(errorMessage);
     }
   };
@@ -53,8 +55,10 @@ const AuthProvider = ({ children }) => {
       await fetchUser();
       return response;
     } catch (error) {
-      const errorMessage =
-        error.response?.data?.message || "Invalid Input format.";
+      let errorMessage = "Something went wrong!";
+      if (error.response) {
+        errorMessage = "Invalid Input format";
+      }
       throw new Error(errorMessage);
     }
   };
