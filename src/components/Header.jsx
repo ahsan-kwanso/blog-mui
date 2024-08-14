@@ -197,6 +197,26 @@ const Header = () => {
         </IconButton>
         <p>Profile</p>
       </MenuItem>
+      <MenuItem
+        sx={{
+          display: "none", // Default to hidden
+          "@media (max-width: 605px)": {
+            display: "block", // Show only on screens narrower than 605px
+          },
+        }}
+      >
+        <Search sx={{ width: "100%" }}>
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder="Search…"
+            inputProps={{ "aria-label": "search" }}
+            value={searchQuery}
+            onChange={handleSearchChange}
+          />
+        </Search>
+      </MenuItem>
     </Menu>
   );
 
@@ -216,17 +236,27 @@ const Header = () => {
           <CustomTypography variant="h6" noWrap component="div">
             𝔇𝔯𝔦𝔟𝔟𝔩𝔢
           </CustomTypography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-              value={searchQuery}
-              onChange={handleSearchChange}
-            />
-          </Search>
+          <Box
+            sx={{
+              display: "none", // Default to hidden
+              "@media (min-width: 605px)": {
+                display: "flex", // Show only on screens wider than 550px
+              },
+              flexGrow: 1,
+            }}
+          >
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+                value={searchQuery}
+                onChange={handleSearchChange}
+              />
+            </Search>
+          </Box>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <ThemeToggleButton toggleTheme={toggleTheme} />
