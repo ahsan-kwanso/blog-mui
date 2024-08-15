@@ -14,6 +14,7 @@ import Profile from "./pages/Profile";
 import PostView from "./pages/PostView";
 import Footer from "./components/Footer";
 import { Box } from "@mui/material";
+import "./utils/global.css";
 
 const App = () => {
   return (
