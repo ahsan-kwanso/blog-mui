@@ -2,3 +2,9 @@
 * {
     caret-color: transparent;
   }
+  .MuiTextField-root input {
+    caret-color: auto; /* Adjust caret color */
+  }
+  .MuiTextField-root textarea {
+    caret-color: auto; /* Adjust caret color */
+  }
