@@ -1,15 +1,17 @@
 import React from "react";
-import { Tabs, Tab, Box, Button } from "@mui/material";
+import { Tabs, Tab, Box } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add"; // Import the Add icon
-import { green } from "@mui/material/colors";
-import Icon from "@mui/material/Icon";
+import { Home } from "@mui/icons-material";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { Person } from "@mui/icons-material";
 
 const NavigationTabs = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const currentTab =
     location.pathname === "/my-posts" ? "my-posts" : "all-posts";
+  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
   const handleTabChange = (event, newValue) => {
     if (newValue === "all-posts") {
@@ -30,7 +32,7 @@ const NavigationTabs = () => {
         paddingX: 2, // Add horizontal padding for better alignment
         overflowX: "auto", // Allow horizontal scroll on smaller screens
         display: "flex",
-        justifyContent: { xs: "flex-start", sm: "center" }, // Align left on small screens, center on larger
+        justifyContent: { xs: "center", sm: "center" }, // Align left on small screens, center on larger
       }}
     >
       <Tabs
@@ -39,17 +41,31 @@ const NavigationTabs = () => {
         variant="scrollable" // Make tabs scrollable on small screens
         scrollButtons="auto" // Automatically show scroll buttons
       >
-        <Tab label="All Posts" value="all-posts" />
-        <Tab label="My Posts" value="my-posts" />
+        <Tab
+          label={isSmallScreen ? <Home /> : "All Posts"}
+          value="all-posts"
+          sx={{
+            minWidth: 100, // Adjust the minimum width if needed
+            paddingX: 1, // Reduce horizontal padding
+          }}
+        />
+        <Tab
+          label={isSmallScreen ? <Person /> : "My Posts"}
+          value="my-posts"
+          sx={{
+            minWidth: 100, // Adjust the minimum width if needed
+            paddingX: 1, // Reduce horizontal padding
+          }}
+        />
         {location.pathname === "/my-posts" && (
           <Tab
-            label="Create Post"
+            label={isSmallScreen ? <AddIcon /> : "Create Posts"}
             value="create-post"
-            icon={<AddIcon />}
             iconPosition="start"
             sx={{
-              minWidth: 150, // Adjust the minimum width as needed
+              minWidth: 100, // Adjust the minimum width as needed
               marginLeft: "auto", // Align to the right
+              paddingX: 1,
             }}
           />
         )}
