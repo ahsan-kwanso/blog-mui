@@ -126,13 +126,16 @@ const EditPost = () => {
                 justifyContent: "space-between",
                 mt: 2,
                 width: "100%",
+                "@media (max-width: 280px)": {
+                  flexDirection: "column", // Switch to column at 350px or below
+                },
               }}
             >
               <Button
                 type="submit"
                 variant="contained"
                 color="primary"
-                sx={{ width: "auto" }}
+                sx={{ width: "auto", marginBottom: "10px" }}
               >
                 Save
               </Button>
@@ -140,7 +143,7 @@ const EditPost = () => {
                 variant="contained"
                 color="secondary"
                 onClick={handleCancel}
-                sx={{ width: "auto" }}
+                sx={{ width: "auto", marginBottom: "10px" }}
               >
                 Cancel
               </Button>

@@ -64,12 +64,25 @@ const PostDetails = ({ post, onReplySubmit }) => {
       >
         {`Posted on ${format(new Date(post.createdAt), "MMMM dd, yyyy")}`}
       </Typography>
-      <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          mt: 2,
+          flexDirection: "row",
+          "@media (max-width: 350px)": {
+            flexDirection: "column", // Switch to column at 350px or below
+          },
+        }}
+      >
         {!isReplyFormVisible && (
           <Button
             variant="contained"
             color="primary"
             onClick={handleReplyClick}
+            sx={{
+              marginBottom: "10px",
+            }}
           >
             Reply
           </Button>
@@ -78,6 +91,9 @@ const PostDetails = ({ post, onReplySubmit }) => {
           variant="outlined"
           color="secondary"
           onClick={handleBackToDashboard}
+          sx={{
+            marginBottom: "10px",
+          }}
         >
           Back to Dashboard
         </Button>
