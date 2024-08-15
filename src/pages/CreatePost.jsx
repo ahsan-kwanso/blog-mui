@@ -13,13 +13,17 @@ import {
 import { useNavigate } from "react-router-dom";
 import ThemeHeader from "../components/ThemeHeader";
 import useCreatePost from "../hooks/useCreatePost";
+import { createPostSchema } from "../validations/createPostSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const CreatePost = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: zodResolver(createPostSchema),
+  });
 
   const navigate = useNavigate();
   const { createPost, isCreating, error, success } = useCreatePost();
@@ -68,7 +72,7 @@ const CreatePost = () => {
             name="title"
             autoComplete="title"
             autoFocus
-            {...register("title", { required: "Title is required" })}
+            {...register("title")}
             error={!!errors.title}
             helperText={errors.title?.message}
           />
@@ -82,7 +86,7 @@ const CreatePost = () => {
             name="content"
             multiline
             rows={6} // Increased height for content box
-            {...register("content", { required: "Content is required" })}
+            {...register("content")}
             error={!!errors.content}
             helperText={errors.content?.message}
           />
