@@ -59,6 +59,17 @@ const cardStyle = {
   },
 };
 
+const cardStyleBottom = {
+  maxWidth: 345,
+  transition: "transform 0.3s ease-in-out",
+  opacity: 0,
+  animation: `${slideIn} 1s ease-out forwards`,
+  "&:hover": {
+    transform: "scale(1.05)",
+  },
+  mb: { xs: 10, md: 0 },
+};
+
 const Intro = () => {
   return (
     <>
@@ -159,7 +170,7 @@ const Intro = () => {
               </Typography>
             </CardContent>
           </Card>
-          <Card sx={cardStyle}>
+          <Card sx={cardStyleBottom}>
             <CardMedia
               component="img"
               height="140"

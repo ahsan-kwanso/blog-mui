@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Outlet, Navigate } from "react-router-dom";
+import { useSnackbar } from "../contexts/SnackbarContext";
 
 const PrivateRoute = () => {
   const token = localStorage.getItem("token");
-  //console.log(token);
-  return token ? <Outlet /> : <Navigate to="/" />;
-  /* Outlet means show whatever is inside that privateroute component, in our case seee that app.jsx profile is wrappeed within this private route */
+  const { showSnackbar } = useSnackbar();
+
+  useEffect(() => {
+    if (!token) {
+      showSnackbar("Please login first");
+    }
+  }, [token, showSnackbar]);
+
+  if (!token) {
+    return <Navigate to="/" />;
+  }
+
+  return <Outlet />;
 };
 
 export default PrivateRoute;
