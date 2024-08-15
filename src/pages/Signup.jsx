@@ -14,6 +14,8 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/system";
 import ThemeHeader from "../components/ThemeHeader";
+import { zodResolver } from "@hookform/resolvers/zod";
+import signupSchema from "../validations/signupSchema";
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(4),
@@ -51,7 +53,9 @@ const Signup = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: zodResolver(signupSchema), // Integrate Zod schema here
+  });
 
   const onSubmit = async (data) => {
     try {
