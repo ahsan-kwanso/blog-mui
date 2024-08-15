@@ -1,23 +1,35 @@
-// src/components/ReplyForm.jsx
-import React, { useState } from "react";
+import React from "react";
 import { Box, TextField, Button, Alert } from "@mui/material";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { replySchema } from "../validations/replySchema";
 import axiosInstance from "../axiosInstance";
 import { useError } from "../hooks/useError";
 
 const ReplyForm = ({ postId, parentId, onClose }) => {
-  const [reply, setReply] = useState("");
   const [error, setError] = useError();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  // Initialize react-hook-form with Zod schema
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(replySchema),
+    defaultValues: {
+      reply: "",
+    },
+  });
 
+  const handleFormSubmit = async (data) => {
     try {
       await axiosInstance.post("/comments", {
         PostId: postId,
-        content: reply,
+        content: data.reply,
         ParentId: parentId || null,
       });
-      setReply("");
+      reset(); // Clear the input field
       onClose(); // Close the form after submission
     } catch (error) {
       setError("Failed to submit reply. Please try again.");
@@ -26,20 +38,25 @@ const ReplyForm = ({ postId, parentId, onClose }) => {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 2 }}>
+    <Box
+      component="form"
+      onSubmit={handleSubmit(handleFormSubmit)}
+      sx={{ mt: 2 }}
+    >
       {error && (
         <Alert severity="error" sx={{ mb: 2 }}>
           {error}
         </Alert>
       )}
       <TextField
+        {...register("reply")}
         fullWidth
         label="Write a reply..."
         multiline
         rows={4}
-        value={reply}
-        onChange={(e) => setReply(e.target.value)}
         variant="outlined"
+        error={!!errors.reply}
+        helperText={errors.reply?.message}
         sx={{ mb: 2 }}
       />
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
