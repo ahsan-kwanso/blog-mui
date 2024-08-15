@@ -16,6 +16,8 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/system";
 import ThemeHeader from "../components/ThemeHeader";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema } from "../validations/loginSchema";
 
 // Define styled components
 const StyledPaper = styled(Paper)(({ theme }) => ({
@@ -54,7 +56,9 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: zodResolver(loginSchema),
+  });
 
   const onSubmit = async (data) => {
     try {
@@ -85,7 +89,7 @@ const Login = () => {
               variant="outlined"
               margin="normal"
               fullWidth
-              {...register("email", { required: "Email is required" })}
+              {...register("email")}
               error={!!errors.email}
               helperText={errors.email?.message}
             />
@@ -95,7 +99,7 @@ const Login = () => {
               variant="outlined"
               margin="normal"
               fullWidth
-              {...register("password", { required: "Password is required" })}
+              {...register("password")}
               error={!!errors.password}
               helperText={errors.password?.message}
             />
