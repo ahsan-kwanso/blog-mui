@@ -14,6 +14,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import ThemeHeader from "../components/ThemeHeader";
 import useFetchPostById from "../hooks/useFetchPostById";
 import useEditPost from "../hooks/useEditPost";
+import { postSchema } from "../validations/postSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const EditPost = () => {
   const { postId } = useParams(); // Get post ID from URL
@@ -27,6 +29,7 @@ const EditPost = () => {
     setValue,
     formState: { errors },
   } = useForm({
+    resolver: zodResolver(postSchema),
     defaultValues: {
       title: "",
       content: "",
@@ -93,7 +96,7 @@ const EditPost = () => {
               name="title"
               autoComplete="title"
               autoFocus
-              {...register("title", { required: "Title is required" })}
+              {...register("title")}
               error={!!errors.title}
               helperText={errors.title?.message}
             />
@@ -107,7 +110,7 @@ const EditPost = () => {
               name="content"
               multiline
               rows={6}
-              {...register("content", { required: "Content is required" })}
+              {...register("content")}
               error={!!errors.content}
               helperText={errors.content?.message}
             />

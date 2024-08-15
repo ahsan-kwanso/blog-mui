@@ -13,7 +13,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import ThemeHeader from "../components/ThemeHeader";
 import useCreatePost from "../hooks/useCreatePost";
-import { createPostSchema } from "../validations/createPostSchema";
+import { postSchema } from "../validations/postSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const CreatePost = () => {
@@ -22,7 +22,7 @@ const CreatePost = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(createPostSchema),
+    resolver: zodResolver(postSchema),
   });
 
   const navigate = useNavigate();
