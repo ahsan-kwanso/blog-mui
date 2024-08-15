@@ -13,7 +13,6 @@ const Dashboard = () => {
   const limit = parseInt(searchParams.get("limit")) || 6;
   const searchQuery = searchParams.get("search") || "";
 
-  // Always call both hooks
   const {
     posts: postsSearch,
     total: totalSearch,

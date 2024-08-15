@@ -214,6 +214,12 @@ const Header = () => {
             inputProps={{ "aria-label": "search" }}
             value={searchQuery}
             onChange={handleSearchChange}
+            sx={{
+              caretColor: "auto", // Enables the blinking text cursor
+              "& input": {
+                caretColor: "auto",
+              },
+            }}
           />
         </Search>
       </MenuItem>
@@ -254,6 +260,12 @@ const Header = () => {
                 inputProps={{ "aria-label": "search" }}
                 value={searchQuery}
                 onChange={handleSearchChange}
+                sx={{
+                  caretColor: "auto", // Enables the blinking text cursor
+                  "& input": {
+                    caretColor: "auto",
+                  },
+                }}
               />
             </Search>
           </Box>
