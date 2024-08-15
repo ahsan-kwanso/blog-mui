@@ -85,7 +85,7 @@ const Signup = () => {
               variant="outlined"
               margin="normal"
               fullWidth
-              {...register("name", { required: "Name is required" })}
+              {...register("name")}
               error={!!errors.name}
               helperText={errors.name?.message}
             />
@@ -94,7 +94,7 @@ const Signup = () => {
               variant="outlined"
               margin="normal"
               fullWidth
-              {...register("email", { required: "Email is required" })}
+              {...register("email")}
               error={!!errors.email}
               helperText={errors.email?.message}
             />
@@ -104,7 +104,7 @@ const Signup = () => {
               variant="outlined"
               margin="normal"
               fullWidth
-              {...register("password", { required: "Password is required" })}
+              {...register("password")}
               error={!!errors.password}
               helperText={errors.password?.message}
             />
