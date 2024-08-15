@@ -29,9 +29,23 @@ const PostView = () => {
   };
 
   return (
-    <Container component="main" maxWidth="md">
+    <Container
+      component="main"
+      maxWidth="md"
+      sx={{
+        paddingX: { xs: 1, sm: 3, md: 4 }, // Adjust horizontal padding for different screen sizes
+      }}
+    >
       <ThemeHeader />
-      <Box sx={{ padding: 4, marginTop: "64px" }}>
+      <Box
+        sx={{
+          padding: { xs: 1, sm: 4 }, // Adjust padding for different screen sizes
+          marginTop: "64px",
+          backgroundColor: "background.paper",
+          borderRadius: 2,
+          boxShadow: { xs: 1, sm: 3 }, // Adjust shadow intensity for different screen sizes
+        }}
+      >
         {error && (
           <Snackbar open autoHideDuration={6000}>
             <Alert severity="error">{error}</Alert>
