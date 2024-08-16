@@ -7,11 +7,13 @@ import PostList from "../components/PostList";
 import NavigationTabs from "../components/NavigationTabs";
 import useFetchMyPosts from "../hooks/useFetchMyPosts";
 import useFetchSearchMyPosts from "../hooks/useFetchSearchMyPosts";
+import { defaultPage } from "../utils/pagination";
+import { defaultLimit } from "../utils/pagination";
 
 const MyPosts = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const page = parseInt(searchParams.get("page")) || 1;
-  const limit = parseInt(searchParams.get("limit")) || 6;
+  const page = parseInt(searchParams.get("page")) || defaultPage;
+  const limit = parseInt(searchParams.get("limit")) || defaultLimit;
   const searchQuery = searchParams.get("search") || "";
 
   const {

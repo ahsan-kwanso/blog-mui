@@ -6,24 +6,24 @@ import PostList from "../components/PostList";
 import NavigationTabs from "../components/NavigationTabs";
 import useFetchPosts from "../hooks/useFetchPosts";
 import useFetchSearchPosts from "../hooks/useFetchSearchPosts";
+import { defaultPage } from "../utils/pagination";
+import { defaultLimit } from "../utils/pagination";
 
 const Dashboard = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const page = parseInt(searchParams.get("page")) || 1;
-  const limit = parseInt(searchParams.get("limit")) || 6;
+  const page = parseInt(searchParams.get("page")) || defaultPage;
+  const limit = parseInt(searchParams.get("limit")) || defaultLimit;
   const searchQuery = searchParams.get("search") || "";
 
   const {
     posts: postsSearch,
     total: totalSearch,
-    nextPage: nextPageSearch,
     isLoading: isLoadingSearch,
     error: errorSearch,
   } = useFetchSearchPosts(searchQuery, page, limit);
   const {
     posts: postsDefault,
     total: totalDefault,
-    nextPage: nextPageDefault,
     isLoading: isLoadingDefault,
     error: errorDefault,
   } = useFetchPosts(page, limit);
