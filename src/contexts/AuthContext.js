@@ -1,15 +1,21 @@
 import React, { createContext, useState, useEffect } from "react";
-import { setToken, removeToken } from "../utils/authUtils";
-import { STORED_TOKEN } from "../utils/settings";
+import { getToken, setToken, removeToken } from "../utils/authUtils";
 import axiosInstance from "../axiosInstance";
 
-const AuthContext = createContext();
+const initialAuthContext = {
+  user: null,
+  signup: async () => {},
+  signin: async () => {},
+  signout: () => {},
+};
+
+const AuthContext = createContext(initialAuthContext);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   const fetchUser = async () => {
-    const token = STORED_TOKEN;
+    const token = getToken();
     if (token) {
       try {
         const response = await axiosInstance.get("/users/me");
@@ -51,7 +57,6 @@ const AuthProvider = ({ children }) => {
         email,
         password,
       });
-      console.log(response);
       setToken(response.data.token);
       await fetchUser();
       return response;
