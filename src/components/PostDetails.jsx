@@ -18,7 +18,7 @@ const PostImage = styled(CardMedia)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
   objectFit: "cover",
   width: "100%",
-  height: "auto",
+  height: "100%",
   maxHeight: 300,
 }));
 
