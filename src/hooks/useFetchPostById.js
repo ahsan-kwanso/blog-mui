@@ -21,7 +21,7 @@ const useFetchPost = (postId) => {
     };
 
     fetchPost();
-  }, [postId]);
+  }, [postId, setError]);
 
   return { post, isLoading, error };
 };

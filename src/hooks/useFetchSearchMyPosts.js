@@ -30,7 +30,7 @@ const useFetchSearchMyPosts = (title, page, limit) => {
     if (title) {
       fetchPosts();
     }
-  }, [title, page, limit]);
+  }, [title, page, limit, setError]);
 
   return { posts, nextPage, isLoading, error, total };
 };
