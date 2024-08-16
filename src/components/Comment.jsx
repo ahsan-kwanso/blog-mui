@@ -4,7 +4,6 @@ import {
   Box,
   Typography,
   IconButton,
-  Divider,
   Menu,
   MenuItem,
   Alert,
@@ -64,7 +63,6 @@ const Comment = ({ comment, onReplySubmit }) => {
           alignItems: "center",
         }}
       >
-        {/* <Typography variant="subtitle1">{comment.title}</Typography> */}
         <Typography variant="subtitle1" color="text.primary">
           {comment.content}
         </Typography>
@@ -90,7 +88,7 @@ const Comment = ({ comment, onReplySubmit }) => {
           parentId={comment.id}
         />
       )}
-      {comment.subComments && comment.subComments.length > 0 && (
+      {comment?.subComments && (
         <Box sx={{ ml: 4 }}>
           {comment.subComments.map((subComment) => (
             <Comment
