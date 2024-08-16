@@ -13,6 +13,8 @@ import ThemeHeader from "../components/ThemeHeader";
 import PostDetails from "../components/PostDetails";
 import CommentSection from "../components/CommentSection";
 import useFetchPostWithComments from "../hooks/useFetchPostWithComments";
+import useFetchPostById from "../hooks/useFetchPostById";
+import useFetchCommentsByPostId from "../hooks/useFetchCommentsByPostId";
 
 // Styled components for Skeleton
 const StyledSkeleton = styled(Skeleton)(({ theme }) => ({
@@ -22,7 +24,8 @@ const StyledSkeleton = styled(Skeleton)(({ theme }) => ({
 const PostView = () => {
   const { postId } = useParams();
   const [refresh, setRefresh] = useState(0);
-  const { post, loading, error } = useFetchPostWithComments(postId, refresh);
+  const { post, loading, error } = useFetchPostById(postId);
+  const { comments } = useFetchCommentsByPostId(postId, refresh);
 
   const handleCommentSubmit = () => {
     setRefresh((prev) => prev + 1); // Increment refresh count to trigger refetch
@@ -69,7 +72,7 @@ const PostView = () => {
             <Divider sx={{ my: 4 }} />
             {post && (
               <CommentSection
-                comments={post.comments}
+                comments={comments}
                 onReplySubmit={handleCommentSubmit}
               />
             )}

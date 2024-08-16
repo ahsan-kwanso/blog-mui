@@ -5,7 +5,7 @@ import Comment from "./Comment";
 const CommentSection = ({ comments, onReplySubmit }) => {
   return (
     <Box>
-      {comments.map((comment) => (
+      {comments?.map((comment) => (
         <Box key={comment.id} sx={{ marginBottom: 4 }}>
           <Comment comment={comment} onReplySubmit={onReplySubmit} />
           <Divider />
