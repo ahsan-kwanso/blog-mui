@@ -15,6 +15,7 @@ export const signup = async (name, email, password) => {
     if (error.response) {
       errorMessage = error.response.data.message;
       if (!error.response.data.message) errorMessage = "Invalid format";
+      return errorMessage;
     }
     console.error("Sign up Failed: ", error);
   }
@@ -33,6 +34,7 @@ export const signin = async (email, password) => {
     if (error.response) {
       errorMessage = error.response.data.message;
       if (!error.response.data.message) errorMessage = "Invalid format";
+      return errorMessage;
     }
     console.error("Sign in Failed: ", error);
   }
