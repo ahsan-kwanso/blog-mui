@@ -7,7 +7,7 @@ import useCreateComment from "../hooks/useCreateComment";
 import { useError } from "../hooks/useError";
 
 const ReplyForm = ({ postId, parentId, onClose }) => {
-  const { createComment, error, success } = useCreateComment();
+  const { createComment, error } = useCreateComment();
   const [formError, setFormError] = useError();
 
   // Initialize react-hook-form with Zod schema
