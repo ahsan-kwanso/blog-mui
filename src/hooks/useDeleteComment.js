@@ -14,20 +14,14 @@ export const useDeleteComment = () => {
         setSuccess("Comment deleted successfully");
         return true;
       } else {
-        // Handle specific status codes if needed
         setError("Failed to delete comment");
       }
     } catch (err) {
-      // Error details from Axios response or other sources
       if (err.response) {
-        // Inspect response error details
-        // console.error("Error response data:", err.response.data);
-        // console.error("Error response status:", err.response.status);
         if (err.response.status === 401)
           setError("You can't delete this comment");
         else setError(err.response.data.message || "Failed to delete comment");
       } else {
-        // General error handling
         setError("Failed to delete comment");
       }
       //console.error("Error caught:", err);

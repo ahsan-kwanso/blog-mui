@@ -18,7 +18,6 @@ const useCreatePost = () => {
       return response.data;
     } catch (err) {
       // Handle error based on response
-      console.log(err);
       if (err.response && err.response.data) {
         setError(err.response.data.message || "Failed to create post.");
       } else {

@@ -41,7 +41,7 @@ const Post = ({
   showDelete,
 }) => {
   const navigate = useNavigate(); // Initialize the navigate function
-  const { deletePost, isDeleting, error: deleteError } = useDeletePost();
+  const { deletePost, error: deleteError } = useDeletePost();
   const [successMessage, setSuccessMessage] = useState("");
 
   const onPostDeletion = () => {

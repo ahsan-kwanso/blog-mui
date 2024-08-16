@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography, IconButton, Divider } from "@mui/material";
+import { Box, Divider } from "@mui/material";
 import Comment from "./Comment";
 
 const CommentSection = ({ comments, onReplySubmit }) => {

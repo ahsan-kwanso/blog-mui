@@ -18,6 +18,7 @@ const FooterText = styled(Typography)(({ theme }) => ({
 }));
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
   return (
     <FooterContainer
       position="fixed"
@@ -28,7 +29,7 @@ const Footer = () => {
         marginTop: "10px",
       }}
     >
-      <FooterText>© 2024 Dribble. All rights reserved.</FooterText>
+      <FooterText>© {currentYear} Dribble. All rights reserved.</FooterText>
     </FooterContainer>
   );
 };
