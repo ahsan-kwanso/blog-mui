@@ -17,7 +17,7 @@ export const VALIDATION_MESSAGES = {
   },
   content: {
     minLength: "Content must be at least 10 characters long",
-    maxLength: "Content must be at most 300 characters long",
+    maxLength: "Content must be at most 500 characters long",
   },
   reply: {
     empty: "Reply cannot be empty",

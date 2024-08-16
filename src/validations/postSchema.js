@@ -9,5 +9,5 @@ export const postSchema = z.object({
   content: z
     .string()
     .min(10, VALIDATION_MESSAGES.content.minLength)
-    .max(300, VALIDATION_MESSAGES.content.maxLength),
+    .max(500, VALIDATION_MESSAGES.content.maxLength),
 });
