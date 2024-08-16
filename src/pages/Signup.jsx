@@ -61,7 +61,7 @@ const Signup = () => {
     try {
       const result = await signup(data.name, data.email, data.password);
       if (result.data.token) {
-        navigate("/login"); // Redirect to login or another route
+        navigate("/dashboard"); // Redirect to login or another route
       } else {
         setError("An unexpected error occurred. Try Again Later");
       }
