@@ -4,10 +4,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { replySchema } from "../validations/replySchema";
 import axiosInstance from "../axiosInstance";
+import useCreateComment from "../hooks/useCreateComment";
 import { useError } from "../hooks/useError";
 
 const ReplyForm = ({ postId, parentId, onClose }) => {
-  const [error, setError] = useError();
+  const { createComment, error, success } = useCreateComment();
+  const [formError, setFormError] = useError();
 
   // Initialize react-hook-form with Zod schema
   const {
@@ -24,7 +26,7 @@ const ReplyForm = ({ postId, parentId, onClose }) => {
 
   const handleFormSubmit = async (data) => {
     try {
-      await axiosInstance.post("/comments", {
+      await createComment({
         PostId: postId,
         content: data.reply,
         ParentId: parentId || null,
@@ -32,7 +34,7 @@ const ReplyForm = ({ postId, parentId, onClose }) => {
       reset(); // Clear the input field
       onClose(); // Close the form after submission
     } catch (error) {
-      setError("Failed to submit reply. Please try again.");
+      setFormError("Failed to submit reply. Please try again.");
       console.error("Failed to submit reply", error);
     }
   };
@@ -43,9 +45,9 @@ const ReplyForm = ({ postId, parentId, onClose }) => {
       onSubmit={handleSubmit(handleFormSubmit)}
       sx={{ mt: 2 }}
     >
-      {error && (
+      {(error || formError) && (
         <Alert severity="error" sx={{ mb: 2 }}>
-          {error}
+          {error || formError}
         </Alert>
       )}
       <TextField
