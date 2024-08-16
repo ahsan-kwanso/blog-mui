@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
+import PublicRoute from "./components/PublicRoute";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Intro from "./pages/Intro";
@@ -24,8 +25,10 @@ const App = () => {
           <Router>
             <Routes>
               <Route path="/" element={<Intro />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
+              <Route element={<PublicRoute />}>
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+              </Route>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route element={<PrivateRoute />}>
                 <Route path="/my-posts" element={<MyPosts />} />
