@@ -1,13 +1,14 @@
 import { z } from "zod";
+import { VALIDATION_MESSAGES } from "../utils/messages";
 
-// Define the schema
-const signupSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  email: z.string().email("Invalid email address").min(1, "Email is required"),
+export const signupSchema = z.object({
+  name: z.string().min(1, VALIDATION_MESSAGES.name.required),
+  email: z
+    .string()
+    .email(VALIDATION_MESSAGES.email.invalid)
+    .min(1, VALIDATION_MESSAGES.email.required),
   password: z
     .string()
-    .min(6, "Password must be at least 6 characters long")
-    .min(1, "Password is required"),
+    .min(6, VALIDATION_MESSAGES.password.minLength)
+    .nonempty(VALIDATION_MESSAGES.password.required),
 });
-
-export default signupSchema;

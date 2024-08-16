@@ -1,12 +1,13 @@
 import { z } from "zod";
+import { VALIDATION_MESSAGES } from "../utils/messages";
 
 export const postSchema = z.object({
   title: z
     .string()
-    .min(5, "Title must be at least 5 characters long")
-    .max(100, "Title must be at most 100 characters long"),
+    .min(5, VALIDATION_MESSAGES.title.required)
+    .max(100, VALIDATION_MESSAGES.title.maxLength),
   content: z
     .string()
-    .min(10, "Content must be at least 10 characters long")
-    .max(300, "Content must be at most 300 characters long"),
+    .min(10, VALIDATION_MESSAGES.content.minLength)
+    .max(300, VALIDATION_MESSAGES.content.maxLength),
 });

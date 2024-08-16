@@ -15,7 +15,7 @@ import {
 import { styled } from "@mui/system";
 import ThemeHeader from "../components/ThemeHeader";
 import { zodResolver } from "@hookform/resolvers/zod";
-import signupSchema from "../validations/signupSchema";
+import { signupSchema } from "../validations/signupSchema";
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(4),
