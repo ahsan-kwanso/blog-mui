@@ -3,7 +3,14 @@ import { signup, signin, signout } from "../services/authService";
 import { getToken } from "../utils/authUtils";
 import axiosInstance from "../axiosInstance";
 
-const AuthContext = createContext();
+const initialAuthContext = {
+  user: null,
+  signup: async () => {},
+  signin: async () => {},
+  signout: () => {},
+};
+
+const AuthContext = createContext(initialAuthContext);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
