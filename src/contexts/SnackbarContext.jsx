@@ -79,3 +79,38 @@ export const SnackbarProvider = ({ children }) => {
 
 // Custom Hook to use Snackbar Context
 export const useSnackbar = () => useContext(SnackbarContext);
+
+// import React, { createContext, useContext } from "react";
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
+
+// // Create SnackbarContext
+// const SnackbarContext = createContext();
+
+// // SnackbarProvider Component
+// export const SnackbarProvider = ({ children }) => {
+//   // Show Snackbar with styling
+//   const showSnackbar = (message, type = "info") => {
+//     toast(message, {
+//       type, // 'success', 'error', 'warning', 'info'
+//       position: "bottom-right",
+//       autoClose: 3250,
+//       hideProgressBar: false,
+//       closeOnClick: true,
+//       pauseOnHover: true,
+//       draggable: true,
+//       progress: undefined,
+//       theme: "light", // Use "dark" for dark theme
+//     });
+//   };
+
+//   return (
+//     <SnackbarContext.Provider value={{ showSnackbar }}>
+//       {children}
+//       <ToastContainer />
+//     </SnackbarContext.Provider>
+//   );
+// };
+
+// // Custom Hook to use Snackbar Context
+// export const useSnackbar = () => useContext(SnackbarContext);
