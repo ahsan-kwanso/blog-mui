@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { getToken } from "./utils/authUtils";
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_BACKEND_URL,
 });
@@ -7,7 +7,7 @@ const axiosInstance = axios.create({
 //Now I don't have to include the token every time
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
+    const token = getToken();
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
