@@ -109,7 +109,7 @@ const EditPost = () => {
               label="Content"
               name="content"
               multiline
-              rows={6}
+              rows={5}
               {...register("content")}
               error={!!errors.content}
               helperText={errors.content?.message}
