@@ -4,7 +4,7 @@ import { VALIDATION_MESSAGES } from "../utils/messages";
 export const loginSchema = z.object({
   email: z
     .string()
-    .email(VALIDATION_MESSAGES.email.invalid)
-    .nonempty(VALIDATION_MESSAGES.email.required),
+    .nonempty(VALIDATION_MESSAGES.email.required)
+    .email(VALIDATION_MESSAGES.email.invalid),
   password: z.string().nonempty(VALIDATION_MESSAGES.password.required),
 });
