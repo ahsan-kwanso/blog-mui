@@ -2,6 +2,7 @@
 import { useState } from "react";
 import axiosInstance from "../axiosInstance";
 import { useError } from "./useError";
+import { API_URL } from "../utils/settings";
 
 const useCreatePost = () => {
   const [isCreating, setIsCreating] = useState(false);
@@ -13,7 +14,7 @@ const useCreatePost = () => {
     setError(null); // Reset error state
     setSuccess(null); // Reset success state
     try {
-      const response = await axiosInstance.post("/posts", data);
+      const response = await axiosInstance.post(API_URL.post, data);
       setSuccess("Post created successfully!");
       return response.data;
     } catch (err) {

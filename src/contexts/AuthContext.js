@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import { getToken, setToken, removeToken } from "../utils/authUtils";
 import axiosInstance from "../axiosInstance";
+import { API_URL } from "../utils/settings";
 
 const initialAuthContext = {
   user: null,
@@ -18,7 +19,7 @@ const AuthProvider = ({ children }) => {
     const token = getToken();
     if (token) {
       try {
-        const response = await axiosInstance.get("/users/me");
+        const response = await axiosInstance.get(API_URL.me);
         setUser(response.data.user);
       } catch (error) {
         console.error("Failed to fetch user:", error);
@@ -33,7 +34,7 @@ const AuthProvider = ({ children }) => {
 
   const signup = async (name, email, password) => {
     try {
-      const response = await axiosInstance.post("/auth/signup", {
+      const response = await axiosInstance.post(API_URL.signup, {
         name,
         email,
         password,
@@ -53,7 +54,7 @@ const AuthProvider = ({ children }) => {
 
   const signin = async (email, password) => {
     try {
-      const response = await axiosInstance.post("/auth/signin", {
+      const response = await axiosInstance.post(API_URL.signin, {
         email,
         password,
       });

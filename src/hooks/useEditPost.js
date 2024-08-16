@@ -2,6 +2,8 @@
 import { useState } from "react";
 import axiosInstance from "../axiosInstance"; // Adjust the path as needed
 import { useError } from "./useError";
+import { API_URL } from "../utils/settings";
+
 const useEditPost = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useError();
@@ -12,7 +14,10 @@ const useEditPost = () => {
     setError(null);
     setSuccess(null);
     try {
-      const response = await axiosInstance.put(`/posts/${postId}`, postData);
+      const response = await axiosInstance.put(
+        `${API_URL.post}/${postId}`,
+        postData
+      );
       setSuccess("Post updated successfully!");
       return response.data;
     } catch (err) {

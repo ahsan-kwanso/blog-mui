@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import axiosInstance from "../axiosInstance";
 import { useError } from "./useError";
+import { API_URL } from "../utils/settings";
 
 const useFetchPost = (postId) => {
   const [post, setPost] = useState(null);
@@ -11,7 +12,7 @@ const useFetchPost = (postId) => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await axiosInstance.get(`/posts/${postId}`);
+        const response = await axiosInstance.get(`${API_URL.post}/${postId}`);
         setPost(response.data);
       } catch (err) {
         setError("Failed to Load Post");

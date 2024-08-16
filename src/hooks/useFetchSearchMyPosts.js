@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import axiosInstance from "../axiosInstance";
 import { useError } from "./useError";
+import { API_URL } from "../utils/settings";
 
 const useFetchSearchMyPosts = (title, page, limit) => {
   const [posts, setPosts] = useState([]);
@@ -14,7 +15,7 @@ const useFetchSearchMyPosts = (title, page, limit) => {
     const fetchPosts = async () => {
       setLoading(true);
       try {
-        const response = await axiosInstance.get("/posts/me/search", {
+        const response = await axiosInstance.get(API_URL.myPostsSearch, {
           params: { title, page, limit },
         });
         setPosts(response.data.posts);

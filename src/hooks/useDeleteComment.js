@@ -2,6 +2,7 @@
 import { useState } from "react";
 import axiosInstance from "../axiosInstance";
 import { useError } from "./useError";
+import { API_URL } from "../utils/settings";
 
 export const useDeleteComment = () => {
   const [error, setError] = useError();
@@ -9,7 +10,9 @@ export const useDeleteComment = () => {
 
   const deleteComment = async (commentId) => {
     try {
-      const response = await axiosInstance.delete(`/comments/${commentId}`);
+      const response = await axiosInstance.delete(
+        `${API_URL.comment}/${commentId}`
+      );
       if (response.status === 200) {
         setSuccess("Comment deleted successfully");
         return true;

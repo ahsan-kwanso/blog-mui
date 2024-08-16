@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axiosInstance from "../axiosInstance";
 import { useError } from "./useError";
+import { API_URL } from "../utils/settings";
 
 const useFetchPosts = (page, limit) => {
   const [posts, setPosts] = useState([]);
@@ -16,7 +17,7 @@ const useFetchPosts = (page, limit) => {
         await new Promise((resolve) => setTimeout(resolve, 400));
 
         const response = await axiosInstance.get(
-          `/posts?page=${page}&limit=${limit}`
+          `${API_URL.post}?page=${page}&limit=${limit}`
         );
         const { posts, total, nextPage } = response.data;
         setPosts(posts);
