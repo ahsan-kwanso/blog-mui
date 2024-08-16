@@ -1,22 +1,15 @@
 import React, { createContext, useState, useEffect } from "react";
-import { signup, signin, signout } from "../services/authService";
-import { getToken } from "../utils/authUtils";
+import { setToken, removeToken } from "../utils/authUtils";
+import { STORED_TOKEN } from "../utils/settings";
 import axiosInstance from "../axiosInstance";
 
-const initialAuthContext = {
-  user: null,
-  signup: async () => {},
-  signin: async () => {},
-  signout: () => {},
-};
-
-const AuthContext = createContext(initialAuthContext);
+const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   const fetchUser = async () => {
-    const token = getToken();
+    const token = STORED_TOKEN;
     if (token) {
       try {
         const response = await axiosInstance.get("/users/me");
@@ -32,32 +25,53 @@ const AuthProvider = ({ children }) => {
     fetchUser();
   }, []);
 
-  const handleSignup = async (name, email, password) => {
-    const response = await signup(name, email, password);
-    await fetchUser();
-    return response;
+  const signup = async (name, email, password) => {
+    try {
+      const response = await axiosInstance.post("/auth/signup", {
+        name,
+        email,
+        password,
+      });
+      setToken(response.data.token);
+      await fetchUser();
+      return response;
+    } catch (error) {
+      let errorMessage = "Something went wrong!";
+      if (error.response) {
+        errorMessage = error.response.data.message;
+        if (!error.response.data.message) errorMessage = "Invalid format";
+      }
+      throw new Error(errorMessage);
+    }
   };
 
-  const handleSignin = async (email, password) => {
-    const response = await signin(email, password);
-    await fetchUser();
-    return response;
+  const signin = async (email, password) => {
+    try {
+      const response = await axiosInstance.post("/auth/signin", {
+        email,
+        password,
+      });
+      console.log(response);
+      setToken(response.data.token);
+      await fetchUser();
+      return response;
+    } catch (error) {
+      let errorMessage = "Something went wrong!";
+      if (error.response) {
+        errorMessage = error.response.data.message;
+        if (!error.response.data.message) errorMessage = "Invalid format";
+      }
+      throw new Error(errorMessage);
+    }
   };
 
-  const handleSignout = () => {
-    signout();
+  const signout = () => {
     setUser(null);
+    removeToken();
   };
 
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        signup: handleSignup,
-        signin: handleSignin,
-        signout: handleSignout,
-      }}
-    >
+    <AuthContext.Provider value={{ user, signup, signin, signout }}>
       {children}
     </AuthContext.Provider>
   );
