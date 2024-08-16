@@ -20,12 +20,12 @@ const PostList = ({ posts, isLoading, showEdit, showDelete }) => {
           : posts.map((post) => (
               <Grid item xs={12} sm={6} md={4} key={post.id}>
                 <Post
-                  postId={post.id}
-                  author={post.author}
-                  image={post.image}
-                  title={post.title}
-                  content={post.content}
-                  date={post.date}
+                  postId={post?.id}
+                  author={post?.author}
+                  image={post?.image}
+                  title={post?.title}
+                  content={post?.content}
+                  date={post?.date}
                   showEdit={showEdit}
                   showDelete={showDelete}
                 />
