@@ -41,28 +41,28 @@ const PostDetails = ({ post, onReplySubmit }) => {
 
   return (
     <PostCard>
-      <PostImage component="img" image={getRandomImage()} alt={post.title} />
+      <PostImage component="img" image={getRandomImage()} alt={post?.title} />
       <Typography
         variant="h4"
         gutterBottom
         align="center"
         sx={{ marginTop: 2 }}
       >
-        {post.title}
+        {post?.title}
       </Typography>
       <Typography
         variant="body1"
         color="text.secondary"
         sx={{ marginTop: 1, textAlign: "justify" }}
       >
-        {post.content}
+        {post?.content}
       </Typography>
       <Typography
         variant="caption"
         color="text.secondary"
         sx={{ marginTop: 1 }}
       >
-        {`Posted on ${format(new Date(post.createdAt), "MMMM dd, yyyy")}`}
+        {`Posted on ${format(new Date(post?.createdAt), "MMMM dd, yyyy")}`}
       </Typography>
       <Box
         sx={{
@@ -101,7 +101,7 @@ const PostDetails = ({ post, onReplySubmit }) => {
       {isReplyFormVisible && (
         <ReplyForm
           onClose={handleCloseReplyForm}
-          postId={post.id}
+          postId={post?.id}
           parentId={null}
         />
       )}
