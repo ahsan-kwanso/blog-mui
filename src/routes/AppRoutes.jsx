@@ -12,6 +12,7 @@ import MyPosts from "../pages/MyPosts";
 import Profile from "../pages/Profile";
 import PostView from "../pages/PostView";
 import Footer from "../components/Footer";
+import NotFound from "../pages/NotFound";
 
 const AppRoutes = () => {
   return (
@@ -31,6 +32,7 @@ const AppRoutes = () => {
           <Route path="/posts/:postId" element={<PostView />} />
         </Route>
         {/* Other routes */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </Router>
