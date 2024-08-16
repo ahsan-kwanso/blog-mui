@@ -76,14 +76,14 @@ const Post = ({
           {format(new Date(date), "MMMM dd, yyyy")}
         </Typography>
         <Typography variant="h6" component="div">
-          {title.length > 22 ? `${title.substring(0, 22)}...` : title}
+          {title?.length > 22 ? `${title.substring(0, 22)}...` : title}
         </Typography>
         <Typography
           variant="body2"
           color="text.secondary"
           sx={{ textAlign: "justify" }}
         >
-          {content.length > 110 ? `${content.substring(0, 110)}...` : content}
+          {content?.length > 110 ? `${content.substring(0, 110)}...` : content}
         </Typography>
       </CardContent>
       <IconButton onClick={handleView} color="primary" sx={{ margin: 2 }}>
