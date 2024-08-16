@@ -13,7 +13,6 @@ import MyPosts from "./pages/MyPosts";
 import Profile from "./pages/Profile";
 import PostView from "./pages/PostView";
 import Footer from "./components/Footer";
-import { Box } from "@mui/material";
 import { SnackbarProvider } from "./contexts/SnackbarContext";
 import "./utils/global.css";
 
@@ -23,38 +22,21 @@ const App = () => {
       <ThemeProvider>
         <SnackbarProvider>
           <Router>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                minHeight: "100vh",
-              }}
-            >
-              <Box
-                sx={{
-                  flex: 1,
-                }}
-              >
-                <Routes>
-                  <Route path="/" element={<Intro />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/signup" element={<Signup />} />
-                  <Route path="/dashboard" element={<Dashboard />} />
-                  <Route element={<PrivateRoute />}>
-                    <Route path="/my-posts" element={<MyPosts />} />
-                    <Route path="/post/create-post" element={<CreatePost />} />
-                    <Route
-                      path="/post/edit-post/:postId"
-                      element={<EditPost />}
-                    />
-                    <Route path="/profile" element={<Profile />} />
-                    <Route path="/posts/:postId" element={<PostView />} />
-                  </Route>
-                  {/* Other routes */}
-                </Routes>
-              </Box>
-              <Footer />
-            </Box>
+            <Routes>
+              <Route path="/" element={<Intro />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route element={<PrivateRoute />}>
+                <Route path="/my-posts" element={<MyPosts />} />
+                <Route path="/post/create-post" element={<CreatePost />} />
+                <Route path="/post/edit-post/:postId" element={<EditPost />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/posts/:postId" element={<PostView />} />
+              </Route>
+              {/* Other routes */}
+            </Routes>
+            <Footer />
           </Router>
         </SnackbarProvider>
       </ThemeProvider>
