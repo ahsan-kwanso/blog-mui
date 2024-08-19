@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { Outlet, Navigate } from "react-router-dom";
 import { useSnackbar } from "../contexts/SnackbarContext";
+import { getToken } from "../utils/authUtils";
 
 const PrivateRoute = () => {
-  const token = localStorage.getItem("token");
+  const token = getToken();
   const { showSnackbar } = useSnackbar();
 
   useEffect(() => {
